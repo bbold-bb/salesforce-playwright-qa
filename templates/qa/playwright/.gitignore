@@ -1,0 +1,14 @@
+# Installed packages and run output stay on this machine. Run output captures org pages, which can
+# include real data copied into a partial or full sandbox.
+node_modules/
+evidence/
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+*.webm
+*.zip
+.auth/
+# Playwright CLI sessions and output: page snapshots and the browser profile, signed in.
+.playwright-cli/
+.playwright/

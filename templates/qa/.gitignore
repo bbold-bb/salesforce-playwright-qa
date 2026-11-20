@@ -1,0 +1,5 @@
+# QA evidence and the QA ledger: screenshots and videos of org pages, run summaries, cost figures.
+# Local only; a reviewed round is published with publish.sh.
+evidence/
+.drive-dir
+__pycache__/

@@ -1,0 +1,11 @@
+{
+  "name": "salesforce-qa-playwright",
+  "private": true,
+  "description": "Click-through QA scenarios for a Salesforce build, run with Playwright against a named sandbox",
+  "scripts": {
+    "qa": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.1"
+  }
+}
