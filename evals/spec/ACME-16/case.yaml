@@ -1,0 +1,34 @@
+schema_version: "1.1"
+name: spec-ACME-16
+description: Stage 2. Write the Playwright spec for ACME-16 from its approved Test Steps. Hard checks (spec rules, tsc, --list) run in evals/check.py.
+tags: [spec]
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: "The Test Steps for ACME-16 on the Acme Support project are approved (test-steps/ACME-16.md). Write the Playwright spec for it in tests/. Don't run it against an org."
+  max_turns: 60
+  timeout_seconds: 1200
+  allowed_tools: [Read, Glob, Grep, Write, Edit, Skill, "Bash(npx playwright test --list:*)"]
+runs: 3
+graders:
+  - type: file_exists
+    name: spec-written
+    path: tests/ACME-16.spec.ts
+  - type: regex
+    name: no-skipped-tests
+    target: {source: file, path: tests/ACME-16.spec.ts}
+    pattern: "test\\.(skip|fixme|only)"
+    match: not_contains
+  - type: llm
+    name: checks-match-expected
+    focus: {source: file, path: tests/ACME-16.spec.ts}
+    criteria: >-
+      This is a Playwright spec written from these approved Test Steps: 1. Build check [Build check] Compare the org with the build sub-task's spec (ACME-16-build): the Product Area field, its values against the story's (Hardware, Software, Billing, Accounts), and that it's required on the Support Request page. Flow F1, as Support Agent Test User 2. Create a Support Request and leave Product Area blank, then save. Expected: the save is stopped until a Product Area is picked. Criterion 2. [Video] 3. Pick Accounts as the Product Area and save. Expected: the case saves with Product Area Accounts. Criterion 1. [Video]
+      Judge each step after step 1 (step 1, the build check, isn't in the spec). Pass if every step's assertions
+      check its expected result as written, not something easier (for example, checking a save button exists when
+      the expected result is that the save is stopped with a message). Fail if any step's assertions don't prove
+      its expected result.
+  - type: tool_used
+    name: skill-fired
+    tool: Skill
+    arm: with-only

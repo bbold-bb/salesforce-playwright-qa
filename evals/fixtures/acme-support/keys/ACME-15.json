@@ -1,0 +1,12 @@
+{
+  "ticket": "ACME-15",
+  "criteria": {
+    "1": {"tags": ["Build check", "Video"], "where": "step"},
+    "2": {"tags": ["Video"], "where": "step"},
+    "3": {"tags": [], "where": "other", "other": "ACME-17"}
+  },
+  "users": ["Support Agent Test User"],
+  "forbidden": [],
+  "max_flows": 1,
+  "notes": "Criterion 3 is tested in another story: Coverage names it instead of a step."
+}

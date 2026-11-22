@@ -1,3 +1,11 @@
 .DS_Store
 __pycache__/
 node_modules/
+
+# QA evals: run output and the plan workspace stay local
+evals/results/
+evals/node_modules/
+.superpowers/
+evals/fixtures/acme-support/sfdx/.sf/
+evals/fixtures/acme-support/sfdx/.sfdx/
+evals/tests/deny-words.txt

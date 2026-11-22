@@ -1,0 +1,12 @@
+{
+  "ticket": "ACME-12",
+  "criteria": {
+    "1": {"tags": ["Video"], "where": "step"},
+    "2": {"tags": ["Video"], "where": "step"},
+    "3": {"tags": ["Build check", "Video", "Query"], "where": "step"}
+  },
+  "users": ["Support Agent Test User"],
+  "forbidden": [],
+  "max_flows": 1,
+  "notes": "A blocked save is a video. The rule's scope is read from its formula in the build check."
+}

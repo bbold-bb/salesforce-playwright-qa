@@ -1,0 +1,17 @@
+{
+  "orgName": "Acme Support QA Evals",
+  "edition": "Developer",
+  "description": "Throwaway scratch org for the QA evals' org tier. Created and deleted by evals/org/run.sh.",
+  "hasSampleData": false,
+  "settings": {
+    "lightningExperienceSettings": {
+      "enableS1DesktopEnabled": true
+    },
+    "securitySettings": {
+      "enableAdminLoginAsAnyUser": true
+    },
+    "caseSettings": {
+      "closeCaseThroughStatusChange": true
+    }
+  }
+}

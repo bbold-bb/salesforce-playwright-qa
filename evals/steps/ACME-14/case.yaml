@@ -1,0 +1,37 @@
+schema_version: "1.1"
+name: steps-ACME-14
+description: Stage 1. Draft the QA sub-task's Test Steps for ACME-14 from its story. Hard checks run in evals/check.py.
+tags: [steps]
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: "You're on the Acme Support project (project.md). Story ACME-14 is built and ready for QA; its build sub-task is in builds/. Draft the Test Steps for its QA sub-task and save them to qa-steps/ACME-14.md."
+  max_turns: 30
+  timeout_seconds: 1200
+  allowed_tools: [Read, Glob, Grep, Write, Skill]
+runs: 3
+graders:
+  - type: file_exists
+    name: draft-written
+    path: qa-steps/ACME-14.md
+  - type: regex
+    name: has-coverage
+    target: {source: file, path: qa-steps/ACME-14.md}
+    pattern: "^\\W*coverage"
+    flags: im
+  - type: llm
+    name: plain-and-in-scope
+    focus: {source: file, path: qa-steps/ACME-14.md}
+    criteria: >-
+      These are QA Test Steps drafted for story ACME-14, for a person to approve. The story's acceptance criteria are: 1. On a Support Request, a support agent clicks Escalate, must pick an Escalation Reason, and the case's owner becomes the Tier 2 Support queue. 2. The escalated case shows in the supervisor's "Tier 2 Escalations" list view. 3. The supervisor clicks Accept on the case and becomes its owner. Judge only the numbered steps and the
+      Coverage section; notes to the approver are allowed and not judged. Step 1 is the build check: it may list
+      everything the build sub-task adds, with API names. [Query] steps may name objects, settings and access, since nothing runs as a user there. Pass if all of these
+      hold: (1) the steps a user performs (in a flow, or tagged [Video] or [Screenshot]) use plain words a business
+      user would recognise; (2) no step tests something the story's acceptance criteria don't ask for, such as
+      changing Setup, standard Salesforce behaviour or another story's work (checking by query that a configured
+      access or setting exists is not changing Setup); (3) each step's expected result matches the criterion it names. Fail if any one does not
+      hold.
+  - type: tool_used
+    name: skill-fired
+    tool: Skill
+    arm: with-only

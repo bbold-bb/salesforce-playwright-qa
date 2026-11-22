@@ -1,0 +1,362 @@
+[
+ {
+  "case": "steps-ACME-12",
+  "arm": "with",
+  "run": 0,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "build-check-first",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-tag",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-criterion",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-complete",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-no-extra",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tag-matches-key",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "allowed-users",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "forbidden-absent",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "other-ticket-named",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "max-flows",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "steps-ACME-12",
+  "arm": "with",
+  "run": 1,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "build-check-first",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-tag",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-criterion",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-complete",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-no-extra",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tag-matches-key",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "allowed-users",
+    "passed": false,
+    "detail": "flows run as users the story doesn't need: ['<billing team test user, to be confirmed: see question 1']"
+   },
+   {
+    "rule": "forbidden-absent",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "other-ticket-named",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "max-flows",
+    "passed": false,
+    "detail": "2 flows, the story needs at most 1"
+   }
+  ]
+ },
+ {
+  "case": "steps-ACME-12",
+  "arm": "with",
+  "run": 2,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "build-check-first",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-tag",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-criterion",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-complete",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-no-extra",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tag-matches-key",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "allowed-users",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "forbidden-absent",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "other-ticket-named",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "max-flows",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "steps-ACME-12",
+  "arm": "without",
+  "run": 0,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "build-check-first",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-tag",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-criterion",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-complete",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-no-extra",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tag-matches-key",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "allowed-users",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "forbidden-absent",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "other-ticket-named",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "max-flows",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "steps-ACME-12",
+  "arm": "without",
+  "run": 1,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "build-check-first",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-tag",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-criterion",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-complete",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-no-extra",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tag-matches-key",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "allowed-users",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "forbidden-absent",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "other-ticket-named",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "max-flows",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "steps-ACME-12",
+  "arm": "without",
+  "run": 2,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "build-check-first",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-tag",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-criterion",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-complete",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-no-extra",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tag-matches-key",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "allowed-users",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "forbidden-absent",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "other-ticket-named",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "max-flows",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ }
+]

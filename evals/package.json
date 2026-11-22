@@ -1,0 +1,9 @@
+{
+  "name": "salesforce-playwright-qa-evals",
+  "private": true,
+  "description": "Tools the QA evals' hard checks need: TypeScript for the compile check. The kit's harness is not changed.",
+  "devDependencies": {
+    "@types/node": "24.19.2",
+    "typescript": "5.9.3"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "ticket": "ACME-13",
+  "criteria": {
+    "1": {"tags": ["Build check", "Query"], "where": "step"},
+    "2": {"tags": ["Query"], "where": "step"},
+    "3": {"tags": ["Query", "Build check"], "where": "step"}
+  },
+  "users": [],
+  "forbidden": [],
+  "max_flows": 0,
+  "notes": "Access is proven by build check and query; what the access lets a user do is tested in the story that uses it (ACME-14)."
+}

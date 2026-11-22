@@ -1,0 +1,5 @@
+{
+  "packageDirectories": [{ "path": "force-app", "default": true }],
+  "name": "acme-support-evals",
+  "sourceApiVersion": "62.0"
+}

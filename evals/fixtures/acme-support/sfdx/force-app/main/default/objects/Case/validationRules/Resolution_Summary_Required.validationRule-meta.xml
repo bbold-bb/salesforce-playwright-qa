@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Resolution_Summary_Required</fullName>
+    <active>true</active>
+    <description>ACME-12 (eval fixture). A Support Request can't be closed without a Resolution Summary. Billing Questions are not affected.</description>
+    <errorConditionFormula>AND(RecordType.DeveloperName = 'Support_Request', ISPICKVAL(Status, 'Closed'), ISBLANK(Resolution_Summary__c))</errorConditionFormula>
+    <errorDisplayField>Resolution_Summary__c</errorDisplayField>
+    <errorMessage>Add a Resolution Summary before closing the case.</errorMessage>
+</ValidationRule>

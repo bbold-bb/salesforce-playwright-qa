@@ -150,3 +150,16 @@ What went wrong while the process was built on a large Salesforce Service Cloud 
 | A subagent on another model | A model missing from the price list would be costed wrongly | `session_cost.py` stops on any model not in `PRICES`. Check the prices against Anthropic's pricing page before you rely on them |
 | Ledger CSVs opened in Excel | Saving from Excel reformats dates and IDs | Read the ledger through `qa_report.py`, or open the CSVs read-only |
 | Tooling checks skew the averages | Runs that only tested a change to the QA tooling inflated the cost per scenario | Tag them `tooling-check`. The report leaves them out of the figures and lists them separately |
+
+## Evals
+
+| Gotcha | How it showed up | Fix |
+| --- | --- | --- |
+| The eval runner has no script grader | `claude plugin eval` grades with text patterns, file checks, tool use and a judge only, so it can't compile a spec or read an answer key | `evals/check.py` runs those checks in code on each run's kept folder after the runner finishes (`evals/run.sh` does both) |
+| Eval scaffolds don't see your environment variables | A scaffold that read a variable set by `run.sh` failed: the runner strips custom variables | Scaffolds find the repo from their own path (`evals/<tier>/<case>/scaffold.sh`) |
+| A judge rubric that asks for an answer format | Every judge vote came back FAIL, even for good drafts | Leave the answer format to the runner. Say only what passes and what fails |
+| The judge sees only the file | The judge failed steps for not matching the story, which it never saw | Put the story's acceptance criteria in the rubric itself |
+| Eval runs are sealed off | A run inside the runner had no network, no sf CLI and none of your sign-ins | The org tier runs in its own loop (`evals/org/run.sh`), outside the runner |
+| A new scratch org's first sign-in is slow | The first rehearsal timed out waiting for Lightning to load | `org-up.sh` signs in once to warm the org up before any run |
+| Case needs more fields on a custom page layout | Deploying a new Case layout failed: required layout fields ContactId and the Web fields were missing | The fixture layout includes them |
+| The Dev Hub's daily scratch org limit | Creating a scratch org failed with LIMIT_EXCEEDED after a day of org-tier trials | Each `evals/org/run.sh` uses one scratch org for all its stories and runs. Trial one story at a time on the same org with `--keep-org` only when needed |

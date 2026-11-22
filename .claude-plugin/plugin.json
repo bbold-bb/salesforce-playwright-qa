@@ -1,0 +1,9 @@
+{
+  "name": "salesforce-playwright-qa",
+  "description": "Salesforce QA with Claude Code and Playwright: the kit's QA skill, with an eval suite for it",
+  "version": "0.1.0",
+  "author": { "name": "Ben Bolding" },
+  "license": "MIT",
+  "skills": ["./templates/claude-skills/salesforce-playwright-qa"],
+  "experimental": { "evals": "evals" }
+}

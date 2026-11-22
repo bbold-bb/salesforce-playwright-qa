@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Resolution_Summary__c</fullName>
+    <description>ACME-12 (eval fixture). How a Support Request was resolved. Required to close a Support Request (validation rule Resolution_Summary_Required).</description>
+    <inlineHelpText>Say how the case was resolved, so the fix can be reused. Required before closing a Support Request.</inlineHelpText>
+    <label>Resolution Summary</label>
+    <length>32768</length>
+    <type>LongTextArea</type>
+    <visibleLines>4</visibleLines>
+</CustomField>

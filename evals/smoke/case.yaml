@@ -1,0 +1,16 @@
+schema_version: "1.1"
+name: smoke
+description: Proves the plumbing. The scaffold finds the repo, the run writes a file, check.py can read it.
+tags: [smoke]
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: "Read writing-test-steps.md and write its first heading, exactly as written, into out.txt. Then stop."
+  max_turns: 6
+  timeout_seconds: 180
+  allowed_tools: [Read, Write]
+runs: 1
+graders:
+  - type: file_exists
+    name: out-written
+    path: out.txt

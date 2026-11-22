@@ -1,0 +1,3872 @@
+[
+ {
+  "case": "spec-ACME-11",
+  "arm": "with",
+  "run": 0,
+  "runner_score": 0.6666666666666666,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "scenarios-match",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "opening-card-per-flow",
+    "passed": true,
+    "detail": "1 opening cards for flows ['F1']"
+   },
+   {
+    "rule": "chapter-per-video-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-brittle-locator",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-skip",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "record-naming",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "query-per-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tsc",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "list",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "spec-ACME-11",
+  "arm": "with",
+  "run": 1,
+  "runner_score": 0.6666666666666666,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "scenarios-match",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "opening-card-per-flow",
+    "passed": true,
+    "detail": "1 opening cards for flows ['F1']"
+   },
+   {
+    "rule": "chapter-per-video-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-brittle-locator",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-skip",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "record-naming",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "query-per-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tsc",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "list",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "spec-ACME-11",
+  "arm": "with",
+  "run": 2,
+  "runner_score": 0.6666666666666666,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "scenarios-match",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "opening-card-per-flow",
+    "passed": true,
+    "detail": "1 opening cards for flows ['F1']"
+   },
+   {
+    "rule": "chapter-per-video-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-brittle-locator",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-skip",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "record-naming",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "query-per-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tsc",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "list",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "spec-ACME-11",
+  "arm": "without",
+  "run": 0,
+  "runner_score": 0.6666666666666666,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "scenarios-match",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "opening-card-per-flow",
+    "passed": true,
+    "detail": "1 opening cards for flows ['F1']"
+   },
+   {
+    "rule": "chapter-per-video-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-brittle-locator",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-skip",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "record-naming",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "query-per-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tsc",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "list",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "spec-ACME-11",
+  "arm": "without",
+  "run": 1,
+  "runner_score": 0.6666666666666666,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "scenarios-match",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "opening-card-per-flow",
+    "passed": true,
+    "detail": "1 opening cards for flows ['F1']"
+   },
+   {
+    "rule": "chapter-per-video-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-brittle-locator",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-skip",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "record-naming",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "query-per-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tsc",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "list",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "spec-ACME-11",
+  "arm": "without",
+  "run": 2,
+  "runner_score": 0.6666666666666666,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "scenarios-match",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "opening-card-per-flow",
+    "passed": true,
+    "detail": "1 opening cards for flows ['F1']"
+   },
+   {
+    "rule": "chapter-per-video-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-brittle-locator",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-skip",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "record-naming",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "query-per-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tsc",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "list",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "spec-ACME-12",
+  "arm": "with",
+  "run": 0,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "scenarios-match",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "opening-card-per-flow",
+    "passed": true,
+    "detail": "1 opening cards for flows ['F1']"
+   },
+   {
+    "rule": "chapter-per-video-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-brittle-locator",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-skip",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "record-naming",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "query-per-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tsc",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "list",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "spec-ACME-12",
+  "arm": "with",
+  "run": 1,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "scenarios-match",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "opening-card-per-flow",
+    "passed": true,
+    "detail": "1 opening cards for flows ['F1']"
+   },
+   {
+    "rule": "chapter-per-video-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-brittle-locator",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-skip",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "record-naming",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "query-per-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tsc",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "list",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "spec-ACME-12",
+  "arm": "with",
+  "run": 2,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "scenarios-match",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "opening-card-per-flow",
+    "passed": true,
+    "detail": "1 opening cards for flows ['F1']"
+   },
+   {
+    "rule": "chapter-per-video-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-brittle-locator",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-skip",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "record-naming",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "query-per-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tsc",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "list",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "spec-ACME-12",
+  "arm": "without",
+  "run": 0,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "scenarios-match",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "opening-card-per-flow",
+    "passed": true,
+    "detail": "1 opening cards for flows ['F1']"
+   },
+   {
+    "rule": "chapter-per-video-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-brittle-locator",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-skip",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "record-naming",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "query-per-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tsc",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "list",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "spec-ACME-12",
+  "arm": "without",
+  "run": 1,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "scenarios-match",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "opening-card-per-flow",
+    "passed": true,
+    "detail": "1 opening cards for flows ['F1']"
+   },
+   {
+    "rule": "chapter-per-video-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-brittle-locator",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-skip",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "record-naming",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "query-per-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tsc",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "list",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "spec-ACME-12",
+  "arm": "without",
+  "run": 2,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "scenarios-match",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "opening-card-per-flow",
+    "passed": true,
+    "detail": "1 opening cards for flows ['F1']"
+   },
+   {
+    "rule": "chapter-per-video-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-brittle-locator",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-skip",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "record-naming",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "query-per-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tsc",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "list",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "spec-ACME-13",
+  "arm": "with",
+  "run": 0,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "scenarios-match",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "opening-card-per-flow",
+    "passed": true,
+    "detail": "0 opening cards for flows []"
+   },
+   {
+    "rule": "chapter-per-video-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-brittle-locator",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-skip",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "record-naming",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "query-per-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tsc",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "list",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "spec-ACME-13",
+  "arm": "with",
+  "run": 1,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "scenarios-match",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "opening-card-per-flow",
+    "passed": true,
+    "detail": "0 opening cards for flows []"
+   },
+   {
+    "rule": "chapter-per-video-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-brittle-locator",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-skip",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "record-naming",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "query-per-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tsc",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "list",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "spec-ACME-13",
+  "arm": "with",
+  "run": 2,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "scenarios-match",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "opening-card-per-flow",
+    "passed": true,
+    "detail": "0 opening cards for flows []"
+   },
+   {
+    "rule": "chapter-per-video-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-brittle-locator",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-skip",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "record-naming",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "query-per-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tsc",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "list",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "spec-ACME-13",
+  "arm": "without",
+  "run": 0,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "scenarios-match",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "opening-card-per-flow",
+    "passed": true,
+    "detail": "0 opening cards for flows []"
+   },
+   {
+    "rule": "chapter-per-video-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-brittle-locator",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-skip",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "record-naming",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "query-per-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tsc",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "list",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "spec-ACME-13",
+  "arm": "without",
+  "run": 1,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "scenarios-match",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "opening-card-per-flow",
+    "passed": true,
+    "detail": "0 opening cards for flows []"
+   },
+   {
+    "rule": "chapter-per-video-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-brittle-locator",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-skip",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "record-naming",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "query-per-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tsc",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "list",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "spec-ACME-13",
+  "arm": "without",
+  "run": 2,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "scenarios-match",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "opening-card-per-flow",
+    "passed": true,
+    "detail": "0 opening cards for flows []"
+   },
+   {
+    "rule": "chapter-per-video-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-brittle-locator",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-skip",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "record-naming",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "query-per-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tsc",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "list",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "spec-ACME-14",
+  "arm": "with",
+  "run": 0,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "scenarios-match",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "opening-card-per-flow",
+    "passed": true,
+    "detail": "2 opening cards for flows ['F1', 'F2']"
+   },
+   {
+    "rule": "chapter-per-video-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-brittle-locator",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-skip",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "record-naming",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "query-per-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tsc",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "list",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "spec-ACME-14",
+  "arm": "with",
+  "run": 1,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "scenarios-match",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "opening-card-per-flow",
+    "passed": true,
+    "detail": "2 opening cards for flows ['F1', 'F2']"
+   },
+   {
+    "rule": "chapter-per-video-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-brittle-locator",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-skip",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "record-naming",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "query-per-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tsc",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "list",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "spec-ACME-14",
+  "arm": "with",
+  "run": 2,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "scenarios-match",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "opening-card-per-flow",
+    "passed": true,
+    "detail": "2 opening cards for flows ['F1', 'F2']"
+   },
+   {
+    "rule": "chapter-per-video-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-brittle-locator",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-skip",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "record-naming",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "query-per-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tsc",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "list",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "spec-ACME-14",
+  "arm": "without",
+  "run": 0,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "scenarios-match",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "opening-card-per-flow",
+    "passed": true,
+    "detail": "2 opening cards for flows ['F1', 'F2']"
+   },
+   {
+    "rule": "chapter-per-video-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-brittle-locator",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-skip",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "record-naming",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "query-per-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tsc",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "list",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "spec-ACME-14",
+  "arm": "without",
+  "run": 1,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "scenarios-match",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "opening-card-per-flow",
+    "passed": true,
+    "detail": "2 opening cards for flows ['F1', 'F2']"
+   },
+   {
+    "rule": "chapter-per-video-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-brittle-locator",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-skip",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "record-naming",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "query-per-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tsc",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "list",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "spec-ACME-14",
+  "arm": "without",
+  "run": 2,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "scenarios-match",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "opening-card-per-flow",
+    "passed": true,
+    "detail": "2 opening cards for flows ['F1', 'F2']"
+   },
+   {
+    "rule": "chapter-per-video-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-brittle-locator",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-skip",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "record-naming",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "query-per-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tsc",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "list",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "spec-ACME-15",
+  "arm": "with",
+  "run": 0,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "scenarios-match",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "opening-card-per-flow",
+    "passed": true,
+    "detail": "1 opening cards for flows ['F1']"
+   },
+   {
+    "rule": "chapter-per-video-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-brittle-locator",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-skip",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "record-naming",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "query-per-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tsc",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "list",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "spec-ACME-15",
+  "arm": "with",
+  "run": 1,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "scenarios-match",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "opening-card-per-flow",
+    "passed": true,
+    "detail": "1 opening cards for flows ['F1']"
+   },
+   {
+    "rule": "chapter-per-video-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-brittle-locator",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-skip",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "record-naming",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "query-per-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tsc",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "list",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "spec-ACME-15",
+  "arm": "with",
+  "run": 2,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "scenarios-match",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "opening-card-per-flow",
+    "passed": true,
+    "detail": "1 opening cards for flows ['F1']"
+   },
+   {
+    "rule": "chapter-per-video-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-brittle-locator",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-skip",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "record-naming",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "query-per-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tsc",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "list",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "spec-ACME-15",
+  "arm": "without",
+  "run": 0,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "scenarios-match",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "opening-card-per-flow",
+    "passed": true,
+    "detail": "1 opening cards for flows ['F1']"
+   },
+   {
+    "rule": "chapter-per-video-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-brittle-locator",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-skip",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "record-naming",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "query-per-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tsc",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "list",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "spec-ACME-15",
+  "arm": "without",
+  "run": 1,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "scenarios-match",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "opening-card-per-flow",
+    "passed": true,
+    "detail": "1 opening cards for flows ['F1']"
+   },
+   {
+    "rule": "chapter-per-video-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-brittle-locator",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-skip",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "record-naming",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "query-per-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tsc",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "list",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "spec-ACME-15",
+  "arm": "without",
+  "run": 2,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "scenarios-match",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "opening-card-per-flow",
+    "passed": true,
+    "detail": "1 opening cards for flows ['F1']"
+   },
+   {
+    "rule": "chapter-per-video-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-brittle-locator",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-skip",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "record-naming",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "query-per-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tsc",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "list",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "spec-ACME-16",
+  "arm": "with",
+  "run": 0,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "scenarios-match",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "opening-card-per-flow",
+    "passed": true,
+    "detail": "1 opening cards for flows ['F1']"
+   },
+   {
+    "rule": "chapter-per-video-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-brittle-locator",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-skip",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "record-naming",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "query-per-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tsc",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "list",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "spec-ACME-16",
+  "arm": "with",
+  "run": 1,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "scenarios-match",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "opening-card-per-flow",
+    "passed": true,
+    "detail": "1 opening cards for flows ['F1']"
+   },
+   {
+    "rule": "chapter-per-video-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-brittle-locator",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-skip",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "record-naming",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "query-per-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tsc",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "list",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "spec-ACME-16",
+  "arm": "with",
+  "run": 2,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "scenarios-match",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "opening-card-per-flow",
+    "passed": true,
+    "detail": "1 opening cards for flows ['F1']"
+   },
+   {
+    "rule": "chapter-per-video-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-brittle-locator",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-skip",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "record-naming",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "query-per-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tsc",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "list",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "spec-ACME-16",
+  "arm": "without",
+  "run": 0,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "scenarios-match",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "opening-card-per-flow",
+    "passed": true,
+    "detail": "1 opening cards for flows ['F1']"
+   },
+   {
+    "rule": "chapter-per-video-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-brittle-locator",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-skip",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "record-naming",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "query-per-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tsc",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "list",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "spec-ACME-16",
+  "arm": "without",
+  "run": 1,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "scenarios-match",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "opening-card-per-flow",
+    "passed": true,
+    "detail": "1 opening cards for flows ['F1']"
+   },
+   {
+    "rule": "chapter-per-video-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-brittle-locator",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-skip",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "record-naming",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "query-per-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tsc",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "list",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "spec-ACME-16",
+  "arm": "without",
+  "run": 2,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "scenarios-match",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "opening-card-per-flow",
+    "passed": true,
+    "detail": "1 opening cards for flows ['F1']"
+   },
+   {
+    "rule": "chapter-per-video-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-brittle-locator",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "no-skip",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "record-naming",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "query-per-step",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tsc",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "list",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "steps-ACME-11",
+  "arm": "with",
+  "run": 0,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "build-check-first",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-tag",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-criterion",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-complete",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-no-extra",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tag-matches-key",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "allowed-users",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "forbidden-absent",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "other-ticket-named",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "max-flows",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "steps-ACME-11",
+  "arm": "with",
+  "run": 1,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "build-check-first",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-tag",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-criterion",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-complete",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-no-extra",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tag-matches-key",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "allowed-users",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "forbidden-absent",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "other-ticket-named",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "max-flows",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "steps-ACME-11",
+  "arm": "with",
+  "run": 2,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "build-check-first",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-tag",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-criterion",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-complete",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-no-extra",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tag-matches-key",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "allowed-users",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "forbidden-absent",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "other-ticket-named",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "max-flows",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "steps-ACME-11",
+  "arm": "without",
+  "run": 0,
+  "runner_score": 0.0,
+  "error": "timed out after 600s",
+  "note": "",
+  "findings": [
+   {
+    "rule": "output-file",
+    "passed": false,
+    "detail": "no qa-steps/ACME-11.md"
+   }
+  ]
+ },
+ {
+  "case": "steps-ACME-11",
+  "arm": "without",
+  "run": 1,
+  "runner_score": 0.0,
+  "error": "timed out after 600s",
+  "note": "",
+  "findings": [
+   {
+    "rule": "output-file",
+    "passed": false,
+    "detail": "no qa-steps/ACME-11.md"
+   }
+  ]
+ },
+ {
+  "case": "steps-ACME-11",
+  "arm": "without",
+  "run": 2,
+  "runner_score": 0.0,
+  "error": "timed out after 600s",
+  "note": "",
+  "findings": [
+   {
+    "rule": "output-file",
+    "passed": false,
+    "detail": "no qa-steps/ACME-11.md"
+   }
+  ]
+ },
+ {
+  "case": "steps-ACME-12",
+  "arm": "with",
+  "run": 0,
+  "runner_score": 0.0,
+  "error": "timed out after 600s",
+  "note": "",
+  "findings": [
+   {
+    "rule": "output-file",
+    "passed": false,
+    "detail": "no qa-steps/ACME-12.md"
+   }
+  ]
+ },
+ {
+  "case": "steps-ACME-12",
+  "arm": "with",
+  "run": 1,
+  "runner_score": 0.0,
+  "error": "timed out after 600s",
+  "note": "",
+  "findings": [
+   {
+    "rule": "output-file",
+    "passed": false,
+    "detail": "no qa-steps/ACME-12.md"
+   }
+  ]
+ },
+ {
+  "case": "steps-ACME-12",
+  "arm": "with",
+  "run": 2,
+  "runner_score": 0.0,
+  "error": "timed out after 600s",
+  "note": "",
+  "findings": [
+   {
+    "rule": "output-file",
+    "passed": false,
+    "detail": "no qa-steps/ACME-12.md"
+   }
+  ]
+ },
+ {
+  "case": "steps-ACME-12",
+  "arm": "without",
+  "run": 0,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "build-check-first",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-tag",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-criterion",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-complete",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-no-extra",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tag-matches-key",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "allowed-users",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "forbidden-absent",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "other-ticket-named",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "max-flows",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "steps-ACME-12",
+  "arm": "without",
+  "run": 1,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "build-check-first",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-tag",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-criterion",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-complete",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-no-extra",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tag-matches-key",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "allowed-users",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "forbidden-absent",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "other-ticket-named",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "max-flows",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "steps-ACME-12",
+  "arm": "without",
+  "run": 2,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "build-check-first",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-tag",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-criterion",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-complete",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-no-extra",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tag-matches-key",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "allowed-users",
+    "passed": false,
+    "detail": "flows run as users the story doesn't need: ['Support Agent Test User, in the Acme Support app']"
+   },
+   {
+    "rule": "forbidden-absent",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "other-ticket-named",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "max-flows",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "steps-ACME-13",
+  "arm": "with",
+  "run": 0,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "build-check-first",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-tag",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-criterion",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-complete",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-no-extra",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tag-matches-key",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "allowed-users",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "forbidden-absent",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "other-ticket-named",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "max-flows",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "steps-ACME-13",
+  "arm": "with",
+  "run": 1,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "build-check-first",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-tag",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-criterion",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-complete",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-no-extra",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tag-matches-key",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "allowed-users",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "forbidden-absent",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "other-ticket-named",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "max-flows",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "steps-ACME-13",
+  "arm": "with",
+  "run": 2,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "build-check-first",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-tag",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-criterion",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-complete",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-no-extra",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tag-matches-key",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "allowed-users",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "forbidden-absent",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "other-ticket-named",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "max-flows",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "steps-ACME-13",
+  "arm": "without",
+  "run": 0,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "build-check-first",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-tag",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-criterion",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-complete",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-no-extra",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tag-matches-key",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "allowed-users",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "forbidden-absent",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "other-ticket-named",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "max-flows",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "steps-ACME-13",
+  "arm": "without",
+  "run": 1,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "build-check-first",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-tag",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-criterion",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-complete",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-no-extra",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tag-matches-key",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "allowed-users",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "forbidden-absent",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "other-ticket-named",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "max-flows",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "steps-ACME-13",
+  "arm": "without",
+  "run": 2,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "build-check-first",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-tag",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-criterion",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-complete",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-no-extra",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tag-matches-key",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "allowed-users",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "forbidden-absent",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "other-ticket-named",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "max-flows",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "steps-ACME-14",
+  "arm": "with",
+  "run": 0,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "build-check-first",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-tag",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-criterion",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-complete",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-no-extra",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tag-matches-key",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "allowed-users",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "forbidden-absent",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "other-ticket-named",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "max-flows",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "steps-ACME-14",
+  "arm": "with",
+  "run": 1,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "build-check-first",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-tag",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-criterion",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-complete",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-no-extra",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tag-matches-key",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "allowed-users",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "forbidden-absent",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "other-ticket-named",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "max-flows",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "steps-ACME-14",
+  "arm": "with",
+  "run": 2,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "build-check-first",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-tag",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-criterion",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-complete",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-no-extra",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tag-matches-key",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "allowed-users",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "forbidden-absent",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "other-ticket-named",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "max-flows",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "steps-ACME-14",
+  "arm": "without",
+  "run": 0,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "build-check-first",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-tag",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-criterion",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-complete",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-no-extra",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tag-matches-key",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "allowed-users",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "forbidden-absent",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "other-ticket-named",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "max-flows",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "steps-ACME-14",
+  "arm": "without",
+  "run": 1,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "build-check-first",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-tag",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-criterion",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-complete",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-no-extra",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tag-matches-key",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "allowed-users",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "forbidden-absent",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "other-ticket-named",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "max-flows",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "steps-ACME-14",
+  "arm": "without",
+  "run": 2,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "build-check-first",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-tag",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-criterion",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-complete",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-no-extra",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tag-matches-key",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "allowed-users",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "forbidden-absent",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "other-ticket-named",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "max-flows",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "steps-ACME-15",
+  "arm": "with",
+  "run": 0,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "build-check-first",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-tag",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-criterion",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-complete",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-no-extra",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tag-matches-key",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "allowed-users",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "forbidden-absent",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "other-ticket-named",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "max-flows",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "steps-ACME-15",
+  "arm": "with",
+  "run": 1,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "build-check-first",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-tag",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-criterion",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-complete",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-no-extra",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tag-matches-key",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "allowed-users",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "forbidden-absent",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "other-ticket-named",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "max-flows",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "steps-ACME-15",
+  "arm": "with",
+  "run": 2,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "build-check-first",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-tag",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-criterion",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-complete",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-no-extra",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tag-matches-key",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "allowed-users",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "forbidden-absent",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "other-ticket-named",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "max-flows",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "steps-ACME-15",
+  "arm": "without",
+  "run": 0,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "build-check-first",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-tag",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-criterion",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-complete",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-no-extra",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tag-matches-key",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "allowed-users",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "forbidden-absent",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "other-ticket-named",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "max-flows",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "steps-ACME-15",
+  "arm": "without",
+  "run": 1,
+  "runner_score": 0.6666666666666666,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "build-check-first",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-tag",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-criterion",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-complete",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-no-extra",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tag-matches-key",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "allowed-users",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "forbidden-absent",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "other-ticket-named",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "max-flows",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "steps-ACME-15",
+  "arm": "without",
+  "run": 2,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "build-check-first",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-tag",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-criterion",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-complete",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-no-extra",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tag-matches-key",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "allowed-users",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "forbidden-absent",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "other-ticket-named",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "max-flows",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "steps-ACME-16",
+  "arm": "with",
+  "run": 0,
+  "runner_score": 0.6666666666666666,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "build-check-first",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-tag",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-criterion",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-complete",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-no-extra",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tag-matches-key",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "allowed-users",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "forbidden-absent",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "other-ticket-named",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "max-flows",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "steps-ACME-16",
+  "arm": "with",
+  "run": 1,
+  "runner_score": 0.6666666666666666,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "build-check-first",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-tag",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-criterion",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-complete",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-no-extra",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tag-matches-key",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "allowed-users",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "forbidden-absent",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "other-ticket-named",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "max-flows",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "steps-ACME-16",
+  "arm": "with",
+  "run": 2,
+  "runner_score": 0.6666666666666666,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "build-check-first",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-tag",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-criterion",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-complete",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-no-extra",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tag-matches-key",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "allowed-users",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "forbidden-absent",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "other-ticket-named",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "max-flows",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "steps-ACME-16",
+  "arm": "without",
+  "run": 0,
+  "runner_score": 0.6666666666666666,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "build-check-first",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-tag",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-criterion",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-complete",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-no-extra",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tag-matches-key",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "allowed-users",
+    "passed": false,
+    "detail": "flows run as users the story doesn't need: ['Support Agent Test User, in the Acme Support app']"
+   },
+   {
+    "rule": "forbidden-absent",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "other-ticket-named",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "max-flows",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "steps-ACME-16",
+  "arm": "without",
+  "run": 1,
+  "runner_score": 0.6666666666666666,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "build-check-first",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-tag",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-criterion",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-complete",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-no-extra",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tag-matches-key",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "allowed-users",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "forbidden-absent",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "other-ticket-named",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "max-flows",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ {
+  "case": "steps-ACME-16",
+  "arm": "without",
+  "run": 2,
+  "runner_score": 1.0,
+  "error": null,
+  "note": "",
+  "findings": [
+   {
+    "rule": "build-check-first",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-tag",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "step-has-criterion",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-complete",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "coverage-no-extra",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "tag-matches-key",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "allowed-users",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "forbidden-absent",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "other-ticket-named",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "rule": "max-flows",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ }
+]

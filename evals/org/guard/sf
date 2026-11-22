@@ -1,0 +1,29 @@
+#!/bin/bash
+# The org tier's sf CLI guard. evals/org/run.sh puts this folder first on PATH for each run, so the code a run writes
+# (through the harness's sf() helper) reaches only the throwaway scratch org, and only through the commands the
+# harness uses. It is a guard against mistakes, not a sandbox: code that calls the real sf by its full path gets past it.
+set -euo pipefail
+: "${QA_EVALS_REAL_SF:?set by evals/org/run.sh}"
+: "${QA_EVALS_ORG_ALIAS:?set by evals/org/run.sh}"
+
+case "${1:-} ${2:-} ${3:-}" in
+  "org display"*|"org open "*|"data query"*|"data create record"|"sobject describe"*|"api request rest") ;;
+  *) echo "sf guard: '$*' isn't a command the QA harness uses; blocked in the eval run" >&2; exit 64 ;;
+esac
+
+targets=()
+prev=""
+for a in "$@"; do
+  if [ "$prev" = "-o" ] || [ "$prev" = "--target-org" ]; then targets+=("$a"); fi
+  case "$a" in --target-org=*) targets+=("${a#--target-org=}") ;; esac
+  prev="$a"
+done
+# A command that names no org goes to the scratch org.
+if [ "${#targets[@]}" -eq 0 ]; then
+  exec "$QA_EVALS_REAL_SF" "$@" -o "$QA_EVALS_ORG_ALIAS"
+fi
+if [ "${#targets[@]}" -ne 1 ] || [ "${targets[0]}" != "$QA_EVALS_ORG_ALIAS" ]; then
+  echo "sf guard: only the eval's scratch org ($QA_EVALS_ORG_ALIAS) may be used; got: ${targets[*]:-none}" >&2
+  exit 65
+fi
+exec "$QA_EVALS_REAL_SF" "$@"

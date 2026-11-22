@@ -1,0 +1,11 @@
+1. Build check [Build check]
+   Compare the org with the build sub-task's spec (ACME-12-build): the Resolution Summary field, and the validation rule's formula, message and active flag.
+
+Flow F1, as Support Agent Test User
+2. Open a Support Request, set Status to Closed with Resolution Summary blank, and save. Expected: the save is stopped with "Add a Resolution Summary before closing the case." Criterion 1. [Video]
+3. Fill in a Resolution Summary and save again. Expected: the case saves as Closed. Criterion 2. [Video]
+
+Coverage
+- Criterion 1: flow F1, step 2.
+- Criterion 2: flow F1, step 3.
+- Criterion 3: step 1, the build check, which reads the rule's formula: it checks the Support Request record type, so a Billing Question is never stopped.

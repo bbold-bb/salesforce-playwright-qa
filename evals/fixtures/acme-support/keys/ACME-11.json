@@ -1,0 +1,13 @@
+{
+  "ticket": "ACME-11",
+  "criteria": {
+    "1": {"tags": ["Video"], "where": "step"},
+    "2": {"tags": ["Build check"], "where": "step"},
+    "3": {"tags": ["Video"], "where": "step"},
+    "4": {"tags": ["Query", "Build check"], "where": "step"}
+  },
+  "users": ["Support Agent Test User"],
+  "forbidden": [],
+  "max_flows": 1,
+  "notes": "Report run in the same session as the flow: the flow's video covers it, no screenshot. Values offered: build check."
+}

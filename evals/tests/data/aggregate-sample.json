@@ -1,0 +1,110 @@
+{
+ "schemaVersion": 1,
+ "claudeVersion": "2.1.328",
+ "startedAt": "2026-11-21T19:19:08.054Z",
+ "durationSeconds": 12,
+ "costUsd": 0.00778647,
+ "partial": false,
+ "suite": {
+  "root": "/repo",
+  "ablation": "with-without",
+  "modelOverride": "haiku",
+  "tagFilters": [
+   "smoke"
+  ],
+  "threshold": 0,
+  "concurrency": 1,
+  "plugins": [
+   {
+    "name": "salesforce-playwright-qa",
+    "version": "0.1.0",
+    "path": "/repo"
+   }
+  ]
+ },
+ "cases": [
+  {
+   "name": "smoke",
+   "dir": "evals/smoke",
+   "source": "case_yaml",
+   "runsPerCase": 1,
+   "timeoutSeconds": 180,
+   "maxTurns": 6,
+   "graders": [
+    {
+     "name": "out-written",
+     "type": "file_exists",
+     "weight": 1,
+     "config": {
+      "path": "out.txt",
+      "exists": true
+     }
+    }
+   ],
+   "arms": {
+    "with": [
+     {
+      "score": 1,
+      "passed": true,
+      "turns": 4,
+      "costUsd": 0.0038282000000000004,
+      "judgeCostUsd": 0,
+      "durationSeconds": 5,
+      "startedAt": "2026-11-21T19:19:08.083Z",
+      "error": null,
+      "tracePath": "/kept/e-with/out/trace.jsonl",
+      "skippedPaidGraders": false,
+      "graders": [
+       {
+        "name": "out-written",
+        "passed": true,
+        "weight": 1,
+        "explanation": "out.txt exists as expected",
+        "withOnly": false,
+        "scored": true
+       }
+      ]
+     }
+    ],
+    "without": [
+     {
+      "score": 1,
+      "passed": true,
+      "turns": 4,
+      "costUsd": 0.00395827,
+      "judgeCostUsd": 0,
+      "durationSeconds": 7,
+      "startedAt": "2026-11-21T19:19:13.404Z",
+      "error": null,
+      "tracePath": "/kept/e-without/out/trace.jsonl",
+      "skippedPaidGraders": false,
+      "graders": [
+       {
+        "name": "out-written",
+        "passed": true,
+        "weight": 1,
+        "explanation": "out.txt exists as expected",
+        "withOnly": false,
+        "scored": true
+       }
+      ]
+     }
+    ]
+   },
+   "aggregates": {
+    "score": 1,
+    "passRate": 1,
+    "scoreWithout": 1,
+    "passRateWithout": 1,
+    "delta": 0
+   }
+  }
+ ],
+ "aggregates": {
+  "casesTotal": 1,
+  "casesPassed": 1,
+  "overallScore": 1,
+  "overallPassRate": 1,
+  "meanDelta": 0
+ }
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contact_Channel__c</fullName>
+    <description>ACME-11 (eval fixture). How the customer contacted support. Set by the agent when creating a Support Request; grouped on in the Cases by Contact Channel report.</description>
+    <inlineHelpText>How the customer reached us: Phone, Email, Chat or Web.</inlineHelpText>
+    <label>Contact Channel</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value><fullName>Phone</fullName><default>false</default><label>Phone</label></value>
+            <value><fullName>Email</fullName><default>false</default><label>Email</label></value>
+            <value><fullName>Chat</fullName><default>false</default><label>Chat</label></value>
+            <value><fullName>Web</fullName><default>false</default><label>Web</label></value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

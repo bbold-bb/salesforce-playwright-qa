@@ -1,0 +1,11 @@
+{
+  "ticket": "ACME-16",
+  "criteria": {
+    "1": {"tags": ["Build check", "Video"], "where": "step"},
+    "2": {"tags": ["Video"], "where": "step"}
+  },
+  "users": ["Support Agent Test User"],
+  "forbidden": ["Account Access"],
+  "max_flows": 1,
+  "notes": "Drift trap: the build sub-task lists Account Access where the story says Accounts. Steps after the build check must test the story's value."
+}

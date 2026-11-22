@@ -31,6 +31,7 @@ People approve at three points: the Test Steps before any script, the videos (an
 | [templates/qa/](templates/qa/README.md) | Everything to copy into your project: the build check, the data hygiene audit, the evidence index, the publish script and the full-resolution screenshot script |
 | [templates/qa/playwright/](templates/qa/playwright/README.md) | The Playwright harness inside it: sign-in and Login As, flows with opening and chapter cards, rehearsal with failure snapshots and a storyboard, evidence and video helpers, console, list view and report helpers, traces kept for failed tests, and a spec template |
 | [templates/claude-skills/](templates/claude-skills/README.md) | Claude Code skills to copy into your project's `.claude/skills/`: the kit's own Salesforce Playwright QA skill, and Microsoft's Playwright CLI and trace skills |
+| [evals/](evals/README.md) | A fixed test of Claude drafting Test Steps and writing specs, with an optional tier that rehearses the spec in a throwaway scratch org. Run it on each new model and before changing a rule |
 | [addons/qa-ledger/](addons/qa-ledger/README.md) | Optional. A ledger of every scenario run and what each block of AI work would cost at API list price, rolled up by ticket, story, epic and sprint |
 
 ## Where to start
@@ -61,3 +62,4 @@ MIT, see [LICENSE](LICENSE). The two Playwright skills in `templates/claude-skil
 | Date | Change |
 | --- | --- |
 | 2026-11-20 | First public version |
+| 2026-11-21 | Added evals: Test Steps and spec cases on an invented project, and an org tier on a scratch org |

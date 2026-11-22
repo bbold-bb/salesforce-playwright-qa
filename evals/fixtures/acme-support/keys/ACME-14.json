@@ -1,0 +1,12 @@
+{
+  "ticket": "ACME-14",
+  "criteria": {
+    "1": {"tags": ["Video"], "where": "step"},
+    "2": {"tags": ["Video", "Screenshot"], "where": "step"},
+    "3": {"tags": ["Video"], "where": "step"}
+  },
+  "users": ["Support Agent Test User", "Support Supervisor Test User"],
+  "forbidden": [],
+  "max_flows": 2,
+  "notes": "A handoff: the second user is needed because the criteria are about a second person."
+}
