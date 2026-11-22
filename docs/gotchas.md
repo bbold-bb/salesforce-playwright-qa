@@ -163,3 +163,4 @@ What went wrong while the process was built on a large Salesforce Service Cloud 
 | A new scratch org's first sign-in is slow | The first rehearsal timed out waiting for Lightning to load | `org-up.sh` signs in once to warm the org up before any run |
 | Case needs more fields on a custom page layout | Deploying a new Case layout failed: required layout fields ContactId and the Web fields were missing | The fixture layout includes them |
 | The Dev Hub's daily scratch org limit | Creating a scratch org failed with LIMIT_EXCEEDED after a day of org-tier trials | Each `evals/org/run.sh` uses one scratch org for all its stories and runs. Trial one story at a time on the same org with `--keep-org` only when needed |
+| The eval runner's judge gives no reasons | It failed good drafts on every run and its verdicts couldn't be checked | The judge runs in `check.py` instead, three votes with each reason saved, and a failed call isn't counted as a vote |

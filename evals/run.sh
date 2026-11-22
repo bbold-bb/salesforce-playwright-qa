@@ -24,7 +24,7 @@ mkdir -p "$OUT_DIR"
 # Threshold 0 here: the pass mark (0.67) is applied by check.py to the combined score.
 set +e
 claude plugin eval "$REPO" --no-publish --keep-temp --scaffold --trust-plugin \
-  --threshold 0 --judge-model "${QA_EVALS_JUDGE:-sonnet}" --output-dir "$OUT_DIR" --json "$OUT_DIR/result.json" \
+  --threshold 0 --output-dir "$OUT_DIR" --json "$OUT_DIR/result.json" \
   --allow-tools Bash Write Edit ${EVAL_ARGS[@]+"${EVAL_ARGS[@]}"}
 EVAL_EXIT=$?
 set -e

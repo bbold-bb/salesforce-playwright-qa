@@ -22,6 +22,7 @@ class Row:
     score: float
     failed: list[str] = field(default_factory=list)  # hard rules this run failed
     note: str = ""  # reported, not scored (for example, rehearsal attempts)
+    judged: bool | None = None  # the judge's verdict, None when it didn't run
 
 
 def run_score(runner_score: float, findings: list[Finding]) -> float:
@@ -49,9 +50,18 @@ def case_table(rows: list[Row]) -> str:
         wos = f"{_mean([r.score for r in wo]):.2f}" if wo else "n/a"
         gap = f"{ws - _mean([r.score for r in wo]):+.2f}" if wo else "n/a"
         failed = sorted({f for r in w for f in r.failed})
-        timed = sum(1 for r in w if "timed out" in r.note)
-        notes = "; ".join([r.note.replace("timed out", "").strip("; ") for r in w if r.note.replace("timed out", "").strip("; ")]
-                          + ([f"{timed} timed out"] if timed else []))
+        flags = ("timed out", "judge unavailable")
+        counts = {f: sum(1 for r in w if f in r.note) for f in flags}
+
+        def rest(n: str) -> str:
+            for f in flags:
+                n = n.replace(f, "")
+            return n.strip("; ").strip()
+        notes = "; ".join([rest(r.note) for r in w if rest(r.note)]
+                          + [f"{n} {f}" for f, n in counts.items() if n])
+        judged = [r.judged for r in w if r.judged is not None]
+        if judged:
+            notes = "; ".join(x for x in (notes, f"judge passed {sum(judged)} of {len(judged)}") if x)
         out.append(f"| {c} | {len(w)} | {ws:.2f} | {'yes' if ws >= PASS_MARK - 1e-9 else 'no'} | {wos} | {gap} | "
                    f"{', '.join(failed) or 'none'} | {notes} |")
     return "\n".join(out) + "\n"

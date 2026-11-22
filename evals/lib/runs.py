@@ -22,6 +22,7 @@ class RunRef:
     runner_score: float
     error: str | None
     direct: Path | None = None  # a workspace the org loop made itself: read in place, never deleted
+    runner_checks: int = 0  # how many scored checks the runner's own score averages over
 
 
 def load_runs(result_json: Path) -> list[RunRef]:
@@ -34,7 +35,8 @@ def load_runs(result_json: Path) -> list[RunRef]:
                 kept = Path(trace).parent.parent if trace else None
                 direct = Path(r["workspacePath"]) if r.get("workspacePath") else None
                 found.append(RunRef(case=case["name"], arm=arm, index=i, kept=kept,
-                                    runner_score=float(r.get("score") or 0), error=r.get("error"), direct=direct))
+                                    runner_score=float(r.get("score") or 0), error=r.get("error"), direct=direct,
+                                    runner_checks=sum(1 for g in r.get("graders", []) if g.get("scored", True))))
     return found
 
 

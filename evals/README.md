@@ -10,9 +10,10 @@ Run them on each new model, and before adopting a change to the rules, the skill
 
 ## How a run is graded
 
-Each case runs 3 times. A run's score combines two kinds of check:
+Each case runs 3 times. A run's score combines three kinds of check:
 
-- **Soft checks**, done by Claude Code's eval runner (`claude plugin eval`): the file was written, it has a Coverage section, and a judge model (Sonnet) reads it against a short rubric. A judge miss lowers the run's score.
+- **Soft checks by Claude Code's eval runner** (`claude plugin eval`): the file was written, and it has a Coverage section.
+- **A judge**, run by `check.py` (`lib/judge.py`): Sonnet reads the draft or spec against the case's `rubric.md`, three times, and the majority decides. The judge counts as one soft check beside the runner's. Every vote's reason is saved, so a judge miss can be read and argued with. A judge call that fails (the CLI updating itself, a network blip) isn't a vote; when no call returns, the run is marked "judge unavailable" and keeps its other scores. A run that already failed a hard check isn't judged, since it scores 0 either way.
 - **Hard checks**, done in code by `check.py` on the files the run wrote. Any failed hard check scores the run 0.
 
 | Tier | Hard checks |
@@ -42,7 +43,7 @@ The `steps` and `spec` tiers also run each case **without the kit's skill loaded
 
 Useful options: `--case GLOB` (one per run: the runner keeps only the last, so use a glob such as `steps-ACME-1[12]` for several), `--runs N`, `-j N` (runs at once), `--max-cost-usd X` (stops the suite at that spend), `--keep` (leaves the runs' folders in `/private/tmp` for reading). The org tier takes `--stories`, `--runs`, `--model`, `--budget-usd` (the most one run may spend, default 10) and `--keep-org`.
 
-Each run writes to `evals/results/<time>/` (not committed): `scores.md`, `hard-checks.json` with every failed rule and why, `report.html` from the runner, and `outputs/<case>/<arm>-<n>/` with each draft, spec and rehearsal result, to read by hand. `--save <label>` also copies the scores to `evals/baselines/<date>-<model>-<label>.{json,md}`, which is committed so later runs can be compared.
+Each run writes to `evals/results/<time>/` (not committed): `scores.md`, `hard-checks.json` with every failed rule and every judge vote with its reason, `report.html` from the runner, and `outputs/<case>/<arm>-<n>/` with each draft, spec and rehearsal result and the judge's `judge.md`, to read by hand. `--save <label>` also copies the scores to `evals/baselines/<date>-<model>-<label>.{json,md}`, which is committed so later runs can be compared.
 
 The runner's HTML report is never published: `run.sh` always passes `--no-publish`.
 
@@ -50,7 +51,7 @@ The runner's HTML report is never published: `run.sh` always passes `--no-publis
 
 - **A drop across all 3 runs of a case is a regression.** A 2-of-3 is noise until it repeats.
 - Read `hard-checks.json` for which rule failed, then the run's file under `outputs/`. When the check is wrong and the draft is right, fix the checker or the answer key, not the pass mark.
-- A judge miss with every hard check passing usually means the rubric is unclear. Read the draft, then the rubric in the case's `case.yaml`.
+- For a judge miss, read the run's `judge.md`: it gives each vote's reason. If the reason is wrong, the rubric needs sharpening (`rubric.md` beside the case). `check.py --no-judge` skips the judge, and `QA_EVALS_JUDGE` and `QA_EVALS_JUDGE_VOTES` change its model and number of votes.
 
 ## The org tier
 
@@ -64,7 +65,7 @@ It runs outside `claude plugin eval`, because the runner's sealed runs have no n
 
 ## Keeping the evals honest
 
-- **A rule change updates its check in the same commit.** A change to `docs/writing-test-steps.md`, the skill or `templates/qa/playwright/templates/story.spec.ts` updates the matching checker (`lib/steps_check.py`, `lib/spec_check.py`), answer key (`fixtures/acme-support/keys/`) or rubric (`steps/*/case.yaml`, `spec/*/case.yaml`).
+- **A rule change updates its check in the same commit.** A change to `docs/writing-test-steps.md`, the skill or `templates/qa/playwright/templates/story.spec.ts` updates the matching checker (`lib/steps_check.py`, `lib/spec_check.py`), answer key (`fixtures/acme-support/keys/`) or rubric (`steps/*/rubric.md`, `spec/*/rubric.md`).
 - **Answer keys and approved steps never enter a run's folder.** The scaffolds copy only the story, the build sub-task, the kit's docs and the harness. `docs/superpowers/` (the evals' own design, which describes the traps) is never copied.
 - **No real names in the fixtures.** List the client, employer and people names your fixtures must never contain in `evals/tests/deny-words.txt`, one per line. It's gitignored, so your list stays on your machine, and `test_no_real_names` checks the fixtures against it (it's skipped when the file is missing).
 - **Tests:** `python3 -m unittest discover -s evals/tests -t .` from the repo root checks the checkers themselves.
@@ -86,8 +87,8 @@ It runs outside `claude plugin eval`, because the runner's sealed runs have no n
 | --- | --- |
 | `run.sh` | Runs the `steps` and `spec` tiers through `claude plugin eval`, then `check.py` |
 | `check.py` | The hard checks, the combined score and the score table |
-| `lib/` | The checkers (`steps_check.py`, `spec_check.py`, `org_check.py`), the tiers' registration (`tiers.py`), reading runs (`runs.py`) and scores (`score.py`) |
-| `steps/`, `spec/` | One case per story: `case.yaml` (prompt, soft checks, judge rubric) and `scaffold.sh` |
+| `lib/` | The checkers (`steps_check.py`, `spec_check.py`, `org_check.py`), the judge (`judge.py`), the tiers' registration (`tiers.py`), reading runs (`runs.py`) and scores (`score.py`) |
+| `steps/`, `spec/` | One case per story: `case.yaml` (prompt and the runner's soft checks), `rubric.md` (what the judge reads against) and `scaffold.sh` |
 | `scaffold/` | What each tier's run starts with |
 | `org/` | The org tier: `run.sh`, `org-up.sh`, `org-down.sh`, `warm.cjs`, `write_result.py` and the sf guard |
 | `fixtures/acme-support/` | The invented project: stories, build sub-tasks, approved Test Steps, answer keys, and the scratch org's metadata |

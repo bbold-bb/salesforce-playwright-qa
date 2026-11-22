@@ -60,6 +60,20 @@ def org_note(run: RunRef, ws: Path) -> str:
     return f"{n} rehearsal attempt{'' if n == 1 else 's'}"
 
 
+def judged_file(run: RunRef, ws: Path) -> Path | None:
+    """The file the judge reads for this run: the draft (steps) or the spec (spec). The org tier has no judge."""
+    t = ticket_of(run.case)
+    p = {"steps-": ws / "qa-steps" / f"{t}.md", "spec-": ws / "tests" / f"{t}.spec.ts"}.get(run.case.split("-")[0] + "-")
+    return p if p is not None and p.is_file() else None
+
+
+def rubric(run: RunRef) -> str | None:
+    """The case's rubric: evals/<tier>/<ticket>/rubric.md."""
+    tier, t = run.case.split("-", 1)
+    p = FIX.parent.parent / tier / t / "rubric.md"
+    return p.read_text() if p.is_file() else None
+
+
 def outputs(run: RunRef, ws: Path) -> list[Path]:
     """The files a run produced that a person may want to read: the draft, the spec, a rehearsal's results, and in
     the org tier Claude's own final message."""
