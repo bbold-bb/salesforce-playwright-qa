@@ -28,7 +28,7 @@ People approve at three points: the Test Steps before any script, the videos (an
 | [docs/setup-guide.md](docs/setup-guide.md) | From a fresh Mac to a first rehearsed and recorded scenario: the order to set things up and how to confirm each one works |
 | [docs/gotchas.md](docs/gotchas.md) | What went wrong while the process was built, how it showed up, and the fix. Read it before your first run |
 | [docs/starter-prompt.md](docs/starter-prompt.md) | A prompt to paste into Claude Code in your project, and a block of QA working rules for your project's `CLAUDE.md` |
-| [templates/qa/](templates/qa/README.md) | Everything to copy into your project: the build check, the data hygiene audit, the evidence index, the publish script and the full-resolution screenshot script |
+| [templates/qa/](templates/qa/README.md) | Everything to copy into your project: the script that creates each tester's own test users from the personas you define, the build check, the data hygiene audit, the evidence index, the publish script and the full-resolution screenshot script |
 | [templates/qa/playwright/](templates/qa/playwright/README.md) | The Playwright harness inside it: sign-in and Login As, flows with opening and chapter cards, rehearsal with failure snapshots and a storyboard, evidence and video helpers, console, list view and report helpers, traces kept for failed tests, and a spec template |
 | [templates/claude-skills/](templates/claude-skills/README.md) | Claude Code skills to copy into your project's `.claude/skills/`: the kit's own Salesforce Playwright QA skill, and Microsoft's Playwright CLI and trace skills |
 | [evals/](evals/README.md) | A fixed test of Claude drafting Test Steps and writing specs, with an optional tier that rehearses the spec in a throwaway scratch org. Run it on each new model and before changing a rule |
@@ -47,7 +47,7 @@ People approve at three points: the Test Steps before any script, the videos (an
 - A Mac (the screenshot helper uses macOS tools; the rest should work elsewhere but hasn't been tried)
 - Jira, if Claude will read and write the QA sub-tasks
 
-The kit holds no passwords and stores no sessions. It reads the org's metadata and creates only the test records its scenarios need.
+The kit holds no passwords and stores no sessions. It reads the org's metadata and creates only the test users you approve and the test records its scenarios need.
 
 ## Contributing
 
@@ -62,4 +62,5 @@ MIT, see [LICENSE](LICENSE). The two Playwright skills in `templates/claude-skil
 | Date | Change |
 | --- | --- |
 | 2026-11-20 | First public version |
+| 2026-11-25 | Test users per tester and persona (`personas.json`, `test_users.py`, `testUser()`), with who ran each step in the evidence. The run lock covers rehearsals and waits its turn, waiting time is cut from videos, console tabs settle before they're closed, and more report and screen flow helpers |
 | 2026-11-21 | Added evals: Test Steps and spec cases on an invented project, and an org tier on a scratch org |

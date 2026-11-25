@@ -14,7 +14,9 @@ What went wrong while the process was built on a large Salesforce Service Cloud 
 | Login As reports an error while it works | Login As can report `net::ERR_ABORTED` and still complete, the "Logged in as" banner doesn't always render, and running Login As again as the test user lands in Salesforce Classic | Run Login As once, and confirm the switch from Lightning's current user, not from the banner |
 | "Log out as" ends at the login page | One tab couldn't go back to the admin to sign in as a second user | Get a fresh one-time URL from the sf CLI, then Login As again. One video can then follow several users |
 | Lightning caches metadata across Login As | A permission set given through the API didn't show its record type at the next Login As in the same browser, because Lightning reused the object info it keeps in browser storage. A fresh browser showed it | Clear the org's browser storage before switching users when access changed mid-run |
-| Two recorded runs at once | Runs from two chats shared the test users, so each video showed the other run's records and tabs | Only one recorded run at a time: the harness takes a lock and a second recorded run stops. Rehearsals don't take the lock |
+| Two runs at once on one machine | Runs from two chats shared the test users, so each video showed the other run's records and tabs. Rehearsals did it to each other too | Every run takes a lock before any spec starts, and a second one waits its turn |
+| Two testers in one sandbox | The lock covers one machine, so two people on the same test users still collided | Each tester has test users of their own, named for them (`test_users.py`). Email deliverability and config records a test changes are still shared: agree first |
+| Tabs still loading when they're closed | The console restores tabs one by one, each reading "Loading...", so another ticket's tab appeared after the cleanup and showed in the video | The cleanup waits until none is loading and the list has stopped changing |
 
 ## Playwright and the sf CLI
 
@@ -112,7 +114,10 @@ What went wrong while the process was built on a large Salesforce Service Cloud 
 | Test steps written from the build | A flow copied the build sub-task, so a build that drifted from the story passed | Draft the user steps from the story's acceptance criteria. The build spec feeds only the build check |
 | A criterion nobody tested | A criterion was dropped between story and script, and no one noticed until review | End the Test Steps with a Coverage section, one bullet per criterion, saying where each is proven |
 | A later sandbox fails on what wasn't deployed yet | A build check in the second sandbox failed on items built after the deployment | Outside the first sandbox, check only what the deployment carried |
-| Test users don't deploy | The second sandbox had the metadata but no test users | Users are data. Make the test users a step in the deployment, with the same profiles and permission sets |
+| Test users don't deploy | The second sandbox had the metadata but no test users | Users are data. Make the test users a step in the deployment: each tester runs `test_users.py` there |
+| Test users made by hand drift | Two sets of the same personas had different permission sets, so a step passed for one tester and failed for the other | One `personas.json` for the team, and `test_users.py --check` after a build changes a persona's access |
+| One name inside another | A check for "Specialist Test" also matched "Senior Specialist Test" | The script refuses names that hold each other |
+| A new user email gets out | A sandbox on "System email only" still sends the new user email | The script inserts users with it off, on `example.com` addresses, and sets no password |
 | Names shared across types | A queue and a public group with the same API name were read as one | Read each by its type |
 | Testing the plain persona | Every test user had extra permission sets, so nobody tested the base access | Keep one test user on the base permission set only |
 

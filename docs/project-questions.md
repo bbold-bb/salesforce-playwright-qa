@@ -39,6 +39,7 @@ How Claude runs it:
 | Who owns the story (description, user story, acceptance criteria)? | No one else edits those fields; a change is proposed in a comment | `CLAUDE.md`, by role |
 | Who approves the QA sub-task's Test Steps before any script is written? | The script implements that approved text, so this is the main handoff (see [how-test-steps-flow.md](how-test-steps-flow.md)) | `CLAUDE.md` "Test Steps first" rule |
 | Who watches the videos and approves the storyboard before a recorded run, and the evidence before it's shared? | First of the two human approvals | `CLAUDE.md` approvals rule |
+| When a second tester runs QA, is their own review of their videos and Testing Feedback enough, or does the approver review those too? | With two or more testers, waiting on one approver holds up passing rounds. The default is that the approver reviews everything | `CLAUDE.md` approvals rule |
 | Who approves the exact Testing Feedback text before it goes to Jira? | Second approval. Often the same person as above | `CLAUDE.md` approvals rule |
 | Who builds (the Salesforce Administrator), and do they run their own smoke test? | The build sub-task's spec feeds the build check; the builder's smoke test is separate from QA | `CLAUDE.md` QA rules |
 | Who settles an unclear evidence tag? | Each answer becomes a row in the decided-cases table | Harness README, Adding a story; [writing-test-steps.md](writing-test-steps.md) |
@@ -49,11 +50,12 @@ Write roles in `CLAUDE.md`, not names, unless your team prefers names. People ch
 
 | Question | Why it matters | Where the answer goes |
 | --- | --- | --- |
-| Which personas do the stories name (specialist, supervisor, manager)? | Each flow runs as the user the story is about | `CLAUDE.md`; each spec's config block |
-| What is each persona's test user called, with which profile, permission set group and add-on permission sets? | Scripts look users up by name. One test user should stay on the base access only, so the plain persona is tested | Each spec's config block; the users themselves in the sandbox |
-| Do the test users exist in every QA environment? | Users are data, not metadata, so they don't move with a deployment. Plan them as a deployment step | Your deployment checklist; the per-environment QA plan |
+| Who do the stories need tested as? Usually personas (specialist, supervisor, manager), but also anyone else: a specialist with an add-on, a person with no access | Each flow runs as the person the story is about. Each gets an entry, named in a word or two with no spaces | `playwright/personas.json`; each spec's `testUser('<entry>')` |
+| For each of them: which profile, role, permission set groups, permission sets, licenses, public groups and queues? Or is there a user who already holds the right access? | The script creates every tester's users from this list. Keep one entry on the base access only, so the plain persona is tested | `playwright/personas.json`. `test_users.py --from-user` prints an entry from an existing user's access |
+| Who will run QA, and how should each tester's name show? | Each tester gets a set of users named for them (`SpecialistTest Ana P`), so testers don't see each other's records | `test_users.py --tester "<name>"`, run by each tester |
+| Are there enough free user licenses in each QA sandbox for one user per entry per tester? | A small sandbox can run out. The script's plan shows what's free and stops when short | Fewer entries, or `--persona` for the ones a tester needs |
+| Which sandboxes need the users? | Users are data, not metadata, so they don't move with a deployment, and a refresh can remove them | Your deployment checklist; the per-environment QA plan |
 | Which app does each persona work in, and is it their default? | A user who lands in the wrong app makes the video show the wrong screen | The test users' default app; `appPath` in specs |
-| Are the test users' email addresses made up (`example.com`)? | Evidence and test records must not reach a real inbox | The users in the sandbox |
 
 ## 5. Signing in and Login As
 
@@ -61,7 +63,7 @@ Write roles in `CLAUDE.md`, not names, unless your team prefers names. People ch
 | --- | --- | --- |
 | Is "Administrators Can Log in as Any User" on in each QA sandbox? | The harness signs in as the admin through the sf CLI, then uses Login As. No script holds a password | Setup, Login Access Policies; [setup-guide.md](setup-guide.md) part 3 |
 | Which admin user is the sf CLI authorized as? Does it have a passkey or MFA that blocks browser sign-in? | The one-time URL from `sf org open --url-only` gets past both | `sf org login web` once per sandbox |
-| Will more than one person or chat run recorded QA at the same time? | Recorded runs share the test users, so the harness lets one run at a time and the rest wait | Team practice; the harness's recording lock |
+| Will more than one person run QA in the same sandbox at the same time? | Each has users of their own, but org-wide settings a test changes (email deliverability, a config record) are still shared, so agree before those runs. On one machine the harness runs one at a time and the rest wait | Team practice; the run lock |
 
 ## 6. Evidence and who can see it
 

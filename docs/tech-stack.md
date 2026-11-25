@@ -28,11 +28,11 @@ Every tool the QA process uses, what it does, the version it ran on, and what it
 | Item | Why | Where |
 | --- | --- | --- |
 | Administrators Can Log in as Any User | Playwright signs in as you through the CLI, then uses Login As to become the test user, so no script holds a password | Setup, Login Access Policies |
-| One test user per persona | Each scenario runs as the user the story is about, with that persona's permission set group | Users. Give them made-up names and `example.com` addresses. Users are data, so create them in every QA sandbox; they don't move with a deployment |
+| Each tester's own test users, one per persona | Each scenario runs as the person the story is about, with that persona's access, and testers don't see each other's records | `test_users.py` creates them from `playwright/personas.json`, with `example.com` addresses. Needs an admin who can manage users, and a free user license for each. Users are data, so create them in every QA sandbox |
 | Access to Send Email | Left at System email only. A step that sends email turns it to All email for the send and back straight after | Setup, Deliverability. Only if a story sends email |
 | The app the personas use | Scripts open records in that app, so the video shows what the user sees | Set as the test users' default app, or the test user may land in a different console (see [gotchas.md](gotchas.md)) |
 
-Nothing is installed in the org. The scripts only read metadata, sign in, and create the test records the scenarios need, apart from a step that changes a setting on purpose (such as email deliverability) and sets it back.
+Nothing is installed in the org. The scripts only read metadata, sign in, and create the test users a tester approves and the test records the scenarios need, apart from a step that changes a setting on purpose (such as email deliverability) and sets it back.
 
 ## In Jira
 

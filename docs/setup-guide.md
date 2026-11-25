@@ -53,29 +53,37 @@ The display shows your username and a Connected status. Every script uses this s
 ## 3. Prepare the sandbox
 
 1. In Setup, enter **Login Access Policies** in Quick Find, select **Administrators Can Log in as Any User**, and save.
-2. Create one test user per persona the stories name, with made-up names and `example.com` email addresses. Give each the persona's profile and permission set group, and set the app they work in as their default. For the example spec, one of them must be named `Specialist Test User` with access to the Service Console app, or change the test user and app in the config block at the top of the example spec to a user and app you have. Keep one test user on the persona's base access only, so the plain persona gets tested.
-3. From the Users list, click **Login** next to one test user, and check they land in the right app with the right access. Log out back to your admin user.
-
-If the **Login** link shows, Login As is on. If the test user lands in a different app than the stories expect, fix their default app now (see [gotchas.md](gotchas.md)).
+Test users come after the templates are copied (part 5).
 
 ## 4. Copy the templates into your project
 
 1. Copy `templates/qa/` into your project, for example as `qa/`. The Playwright runner is inside it, in `qa/playwright/`, and everything shares `qa/evidence/`.
 2. Check that the copied `.gitignore` files cover `evidence/`, `test-results/`, `.playwright-cli/`, `.drive-dir` and `node_modules/`, so evidence, traces and installs stay out of git.
-3. Set your answers from [project-questions.md](project-questions.md) in the config blocks: the org alias, the time zone, the record prefix, the Jira project key, the test user names, the app name and the epic folder. The starter prompt in [starter-prompt.md](starter-prompt.md) has Claude do this with you.
+3. Set your answers from [project-questions.md](project-questions.md) in the config blocks: the org alias, the time zone, the record prefix, the Jira project key, who you test as (`playwright/personas.json`), the app name and the epic folder. The starter prompt in [starter-prompt.md](starter-prompt.md) has Claude do this with you.
 4. Copy the folders in `templates/claude-skills/` into your project's `.claude/skills/`. Claude Code finds them in the next session it starts: the QA skill points it at the harness's helpers and rules, and the two Playwright skills cover the CLI and reading traces. Fill in the harness path and the sandbox alias in `salesforce-playwright-qa/SKILL.md` (they're in angle brackets). See [templates/claude-skills/README.md](../templates/claude-skills/README.md).
 
-## 5. Run the example spec
+## 5. Create your test users
+
+Each tester has users of their own, named for them, so two people can test in one sandbox. How it works is in [templates/qa/playwright/README.md](../templates/qa/playwright/README.md), Test users.
+
+1. Fill in `qa/playwright/personas.json`: one entry for each person the stories are about, with the access that person holds. Keep one entry on a persona's base access only, so the plain persona gets tested. To try the kit first, leave the two examples as they are.
+2. From `qa/`, read the plan: `python3 test_users.py --org my-partial-sandbox --tester "<your name>"`. It stops if the org doesn't have something the file names, or if there aren't enough licenses.
+3. Run the same command with `--rehearse`, which creates everything and undoes it, then with `--apply`, then with `--check`.
+4. From the Users list, click **Login** next to one of your test users. If the **Login** link shows, Login As is on. Open the app the stories expect, so it's the one the user lands in, and log out back to your admin user.
+
+Commit `personas.json`. The other testers start at step 2, each with their own name. `test-users.local.json` is this machine's own and stays out of git.
+
+## 6. Run the example spec
 
 1. From `qa/playwright/`, run `npm install`.
 2. Run `npx playwright install ffmpeg`. This is Playwright's own build of ffmpeg, about 1.4 MB, for video. Playwright is pinned to 1.64.1 in `package.json`.
-3. Rehearse the example in round R0: `QA_ROUND=R0 QA_REASON=rehearsal npm run qa -- example`. A rehearsal runs without video, at full speed, and writes to `qa/evidence/rehearsal/`. If a step fails, read its failure snapshot in `failures/` first (search it for the label you expected), fix the script, and rehearse again.
+3. The example runs as the `Specialist` entry in `personas.json`, in the Service Console app. Change either in the settings block at the top of the spec if yours differ. Rehearse it in round R0: `QA_ROUND=R0 QA_REASON=rehearsal npm run qa -- example`. A rehearsal runs without video, at full speed, and writes to `qa/evidence/rehearsal/`. If a step fails, read its failure snapshot in `failures/` first (search it for the label you expected), fix the script, and rehearse again.
 4. When every step passes, open `storyboard.md` in the rehearsal folder. It lists every card, caption and screenshot in the order a viewer meets them. This is what the approver signs off before a recorded run.
 5. Record once: `QA_ROUND=R1 QA_REASON=first-run npm run qa -- example`.
 
 The recorded run prints each scenario's result. `qa/evidence/` now has a round folder with `screenshots/`, `videos/`, `run-summary.md` and `results.json`. Open a video in Chrome: it should start with an opening card, show the test user's session with a chapter card for each step, and show no records other than this ticket's test records.
 
-## 6. Run a build check
+## 7. Run a build check
 
 The build check compares a ticket's spec with the org's metadata, read-only. The example check works on standard Case metadata, so it runs in any org.
 
@@ -89,7 +97,7 @@ To add a check for your own ticket, follow the steps in [templates/qa/README.md]
 
 Each row shows a metadata type, an API name, the expected value, the org's value, and Match, Mismatch or Recorded.
 
-## 7. Set up publishing to Drive
+## 8. Set up publishing to Drive
 
 Skip this if your evidence goes somewhere else.
 
@@ -99,7 +107,7 @@ Skip this if your evidence goes somewhere else.
 
 The round folder shows up in Drive in the browser within a minute or two.
 
-## 8. Allow full-resolution screenshots (optional)
+## 9. Allow full-resolution screenshots (optional)
 
 Playwright saves its own screenshots, at twice the screen's resolution. You only need this if you also drive Chrome through Claude's browser tools for one-off checks and want evidence-quality images from them.
 
@@ -108,7 +116,7 @@ Playwright saves its own screenshots, at twice the screen's resolution. You only
 
 The PNG shows only the page, at full resolution, with no browser toolbar.
 
-## 9. Record the cost of QA work (optional add-on)
+## 10. Record the cost of QA work (optional add-on)
 
 The ledger add-on records every scenario run and how long the AI worked on each block of QA, with what it would cost at API list price, so you can scope QA on the next project. Skip it if you don't need the figures.
 

@@ -39,6 +39,8 @@ def shared_copy(text):
         if section.startswith(DROP_SECTIONS):
             continue
         lines = [l for l in section.split("\n") if not l.startswith(DROP_BULLETS)]
+        # The shared copy leaves the attempts out, so it doesn't point at their notes.
+        lines = [l.replace("; each attempt's time is in its note", "") for l in lines]
         if section.startswith("## Results"):
             table = [i for i, l in enumerate(lines) if l.startswith("|")]
             lines[table[0]:table[-1] + 1] = without_column(lines[table[0]:table[-1] + 1], "Attempts")

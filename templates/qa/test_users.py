@@ -243,8 +243,14 @@ def holdings(org, user_ids):
     return held
 
 
-USER_SELECT = ("Id, Name, FirstName, LastName, Username, Email, Alias, IsActive, Profile.Name, UserRole.DeveloperName, "
-               + ", ".join(USER_FIELDS))
+def user_select(org):
+    """The fields to read from User. Some, such as the Knowledge checkbox, exist only where the feature is on."""
+    d = org.sf(["sobject", "describe", "--sobject", "User"])
+    if d.get("status") != 0:
+        raise Stop(f"Can't read the User object: {d.get('message')}")
+    there = {f["name"] for f in d["result"]["fields"]}
+    fields = [f for f in USER_FIELDS if f in there]
+    return "Id, Name, FirstName, LastName, Username, Email, Alias, IsActive, Profile.Name, UserRole.DeveloperName, " + ", ".join(fields), set(fields)
 
 
 def license_needs(plan, profile_license):
@@ -396,16 +402,16 @@ def write_settings(path, alias, users):
 
 # --- Commands --------------------------------------------------------------------------------------------------------------
 
-def entry_from_user(org, name, key):
+def entry_from_user(org, name, key, select):
     """Prints a personas.json entry with the access an existing user holds. Nothing that names the person goes in."""
-    rows = org.q(f"SELECT {USER_SELECT} FROM User WHERE Name = {soql_list([name])} AND IsActive = true")
+    rows = org.q(f"SELECT {select} FROM User WHERE Name = {soql_list([name])} AND IsActive = true")
     if len(rows) != 1:
         raise Stop(f"Expected one active user named {name}, found {len(rows)}")
     u, held = rows[0], holdings(org, [rows[0]["Id"]])[rows[0]["Id"]]
     entry = {"description": "", "profile": u["Profile"]["Name"]}
     if u.get("UserRole"):
         entry["role"] = u["UserRole"]["DeveloperName"]
-    entry["user"] = {f: u[f] for f in USER_FIELDS if f in REQUIRED_FIELDS or u[f]}
+    entry["user"] = {f: u[f] for f in USER_FIELDS if f in REQUIRED_FIELDS or u.get(f)}
     entry.update({k: sorted(v) for k, v in held.items() if v})
     print(json.dumps({key: entry}, indent=2))
     print("Read it before adding it to personas.json: leave out access this person holds and the persona shouldn't.", file=sys.stderr)
@@ -433,7 +439,7 @@ def main(argv=None):
     if a.from_user:
         if not a.as_key:
             raise Stop("Give the entry a name with --as, for example --as Specialist")
-        entry_from_user(org, a.from_user, a.as_key)
+        entry_from_user(org, a.from_user, a.as_key, user_select(org)[0])
         return 0
     if not a.tester:
         raise Stop("Give the tester's name with --tester, for example --tester \"Ana P\"")
@@ -442,10 +448,14 @@ def main(argv=None):
         if k not in data["personas"]:
             raise Stop(f"personas.json has no {k} (it has {', '.join(data['personas'])})")
     keys = [k for k in data["personas"] if not a.persona or k in a.persona]
+    select, there = user_select(org)
+    missing = [f"{k}: {f}" for k in keys for f in wanted_fields(data, k) if f not in there]
+    if missing:
+        raise Stop("The org's users don't have these fields (the feature is off):\n  " + "\n  ".join(missing))
     idents = {k: identity(k, a.tester, info["Id"]) for k in keys}
     names = [full_name(i) for i in idents.values()]
     usernames = [i["Username"] for i in idents.values()]
-    existing = {r["Username"]: r for r in org.q(f"SELECT {USER_SELECT} FROM User WHERE Username IN ({soql_list(usernames)})")}
+    existing = {r["Username"]: r for r in org.q(f"SELECT {select} FROM User WHERE Username IN ({soql_list(usernames)})")}
     held = holdings(org, [r["Id"] for r in existing.values()])
 
     if a.rollback:

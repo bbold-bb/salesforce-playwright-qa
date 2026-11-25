@@ -17,6 +17,8 @@ Copy this folder into your project (for example as `qa/`), set the project setti
 | [evidence_index.py](evidence_index.py) | Writes a round's `evidence-index.csv`: the evidence each scenario needs and what the round folder has. Stops a publish when anything is missing |
 | [publish.sh](publish.sh) | Copies a reviewed, complete round and its newest build check to the QA Evidence folder in Google Drive. Refuses rehearsals. Never deletes anything there |
 | [shared_summary.py](shared_summary.py) | Writes the shared copy of a round's run summary for `publish.sh`: each step's result and what was seen, without the attempts, what changed between them or the test tooling |
+| [test_users.py](test_users.py) | Creates a tester's own test users from `playwright/personas.json`, named for the tester: plan, rehearse, apply, check, rollback (see the playwright README, Test users) |
+| `tests/` | Unit tests for `test_users.py` that need no org: `python3 -m unittest discover -s tests` |
 | [playwright/](playwright/README.md) | The click-through scenarios: sign-in and Login As, rehearsals, flows, screenshots, video, the run summary and the ledger rows, with a spec template and an example on the standard Case object |
 | `capture_chrome_window.sh` | Full-resolution screenshots of the test's Chrome window (documented in its own header) |
 | `environment-tickets.json` | Optional. Maps the primary org's QA sub-tasks to another org's, when each environment has its own (see the playwright README, Rounds and attempts) |
@@ -28,6 +30,8 @@ Copy this folder into your project (for example as `qa/`), set the project setti
 | Setting | Where | Default |
 | --- | --- | --- |
 | The org QA runs in | `--org`, else `SF_ORG`, else `DEFAULT_ORG` in `build_check.py` | `my-partial-sandbox` |
+| Who to test as, and the access each holds | `playwright/personas.json` (shared, committed) | two examples on Standard User |
+| This machine's test users | `playwright/test-users.local.json` (gitignored; `test_users.py --apply` writes it) | none; a run stops and says what to run |
 | Playwright settings (org alias, record prefix, evidence folder, time zone, ledger on or off) | `playwright/lib/config.ts` | see the playwright README |
 | Jira project key and Sprint field (ledger add-on) | `JIRA_PROJECT` and `SPRINT` in `ledger/jira_snapshot.py` | `PROJ`, `customfield_10020` |
 | The Drive QA Evidence folder | `.drive-dir` here, or `QA_DRIVE_DIR` | none; `publish.sh` asks |

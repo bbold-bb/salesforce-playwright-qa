@@ -156,8 +156,10 @@ def check_steps(draft: Draft, key: dict, text: str) -> list[Finding]:
                             + (f" (found {got})" if got else ""))
     add("tag-matches-key", not tag_problems, "; ".join(tag_problems))
 
-    allowed_users = {u.lower() for u in key["users"]}
-    bad_users = sorted({u for u in draft.flows.values() if u.lower() not in allowed_users})
+    # A flow names the persona: "Support Agent", or the project's own label for it, "Support Agent Test User".
+    persona = lambda u: re.sub(r"\s+test user$", "", u.lower())
+    allowed_users = {persona(u) for u in key["users"]}
+    bad_users = sorted({u for u in draft.flows.values() if persona(u) not in allowed_users})
     add("allowed-users", not bad_users, f"flows run as users the story doesn't need: {bad_users}" if bad_users else "")
 
     scope = _step_text_after_build_check(draft) + " " + " ".join(draft.coverage.values())

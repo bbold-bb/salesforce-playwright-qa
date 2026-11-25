@@ -16,6 +16,7 @@ The harness is in `<harness path>` (for example `qa/playwright/`; the setup step
 
 | Need | Helper |
 | --- | --- |
+| The persona's test user on this machine, for every place a spec needs a user's name (README, Test users) | `testUser('Specialist')` from `lib/testUsers` |
 | Sign in and become the persona's test user, landing on a page | `signInAs(browser, user, path)` |
 | A second user in the same video | `switchUser`; `clearOrgBrowserData` first if the user's access changed mid-run |
 | A page by URL when getting there isn't under test | `appPath`, `listViewPath`, `reportPath`, `recordPath`, then `goTo` |
@@ -25,11 +26,14 @@ The harness is in `<harness path>` (for example `qa/playwright/`; the setup step
 | Console subtabs | `closeSubtab`, `selectSubtab` |
 | A page section, an inline edit, Change Record Type, Change Owner to a queue | `recordSection`, `editFieldInline`, `changeRecordType`, `changeOwnerToQueue` |
 | A report from its folder, its frame, every group showing | `openReportFromFolder`, `reportViewer`, `hideDetailRows` |
+| A report's date range, a row far down a report | `setReportDateRange`, `scrollReportTo` |
+| A screen flow's radio answer or tick list item | `pickAnswer`, `tickItem` |
+| A wait that's nothing to watch in a video | `waiting(() => ...)` from `lib/videoCuts` |
 | A step that sends email from a sandbox with email off | `withEmailOpen`, and `closeEmailIfOpen` in `afterAll` |
 | A browser context the spec opens itself, so failure snapshots include it | `trackContext` |
 
 4. Find elements by role and label, the way a person reads the screen. Never by position, generated IDs, XPath or CSS classes: XPath doesn't reach inside shadow roots, and Salesforce changes its internal markup between releases.
-5. Every step checks its result by query as well as on screen.
+5. Every step checks its result by query as well as on screen. Wait for the result on screen first, then query: a query holds up the video.
 6. When a new console or list view behaviour turns up, add a helper and a row to the README's patterns table in the same change.
 
 ## Rehearse, then record
@@ -41,7 +45,9 @@ Never find out how a screen behaves inside a recorded round. In this order:
 3. When a step fails, read `failures/A<n>-<step>.aria.yml` in the rehearsal folder first: it holds the address and the role and name of everything each open page showed. Search it for the label you expected (`grep -n -i "owner"`), don't read it whole, and open the trace only if it doesn't answer the question. Fix every problem the snapshot shows for that step in one edit, not one per run.
 4. **Stop rule.** A step that fails three rehearsals in a row is not tried a fourth time, and the run prints a STOP line saying so. Take it to the approver with the snapshot, what was tried, and the options with a recommendation: another way to do the step, proving it by query, or changing the step.
 5. Show the approver `storyboard.md` from the last green rehearsal, with its screenshots, and get their go on the card wording and framing.
-6. Record once: the real round with its real reason. If it fails on the script, fix it and go back to step 2 before another recorded attempt. Only one recorded run goes at a time; a second one stops on the lock.
+6. Record once: the real round with its real reason. If it fails on the script, fix it and go back to step 2 before another recorded attempt.
+
+**One run at a time, rehearsal or recorded.** Every run takes a lock before any spec starts. If another run holds it, yours names that run and waits up to 30 minutes (`QA_WAIT=<minutes>` changes it, `QA_WAIT=0` stops at once), so start it in the background and don't watch `ps`. Never delete the lock. The CLI below doesn't take it: don't use the CLI as a test user while a run is going.
 
 Pick the attempt reason honestly: `script-fix` when the script was wrong, `steps-changed` when the approved Test Steps changed and the script followed them, `flaky` when nothing changed.
 
@@ -66,6 +72,7 @@ A failed test keeps a trace in `test-results/<ticket> <round> <start time>/<test
 
 - **Traces and `.playwright-cli/` stay on this machine.** They hold the page, the network and the session. Never publish, attach or commit them; both are gitignored.
 - **No Playwright Test Agents healer, and no `test.skip`, `test.fixme` or loosened check to make a run pass.** A script change is a `QA_REASON=script-fix` attempt that is rerun and reviewed like any other.
+- **Never type a test user's name in a spec** outside `testUser(...)`: titles, cards, queries and expected owners use its result. Don't change `test-users.local.json` partway through a recorded round. If a run says there are no test users, show the person the `test_users.py` plan; creating users is their call.
 - **No stored sessions or passwords.** Don't add `storageState` files or a setup project that saves one.
 - **The script follows the approved Test Steps.** If a run shows a step is wrong, take it to the approver as a change to what's tested; don't change the step in the script on your own.
 - Set every subagent's model explicitly, per the project's `CLAUDE.md`.

@@ -110,6 +110,14 @@ def check_spec(spec_text: str, approved: Draft, ticket: str) -> list[Finding]:
     skips = [p for p in _SKIP if re.search(p, src)]
     add("no-skip", not skips, ", ".join(skips))
 
+    # Who a spec runs as comes from testUser(), so it runs as any tester's users (README.md, Test users). Checked on the
+    # code and its strings alike: a title or card that types a user's name is wrong for every other tester.
+    typed = sorted(set(re.findall(r"['\"`]([^'\"`\n]*\bTest User\b[^'\"`\n]*)['\"`]", src)))
+    add("no-typed-user", not typed, f"a test user's name typed in the spec: {typed}" if typed else "")
+    runs_as_user = any(s.flow for s in approved.steps)
+    add("test-user-by-persona", not runs_as_user or bool(re.search(r"\btestUser\(\s*['\"`]\w+['\"`]\s*\)", src)),
+        "" if not runs_as_user or "testUser(" in src else "no testUser('<persona>') for a spec that runs as a user")
+
     # Only a spec with steps run as a user can create records; a query-only spec has nothing to name.
     makes_records = any(s.flow or s.tag in ("Video", "Screenshot") for s in approved.steps)
     naming = re.search(r"(?:QA|\$\{RECORD_PREFIX\})\s+\$\{TICKET\}\s+\$\{ROUND\}", src)

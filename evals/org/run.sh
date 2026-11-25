@@ -67,6 +67,7 @@ for T in $STORIES; do
     WS="$WSROOT/$T/run-$n"
     mkdir -p "$WS"
     (cd "$WS" && "$REPO/evals/scaffold/spec.sh" "$REPO" "$T")
+    cp "$OUT/test-users.local.json" "$WS/"
     PROMPT="The Test Steps for $T on the Acme Support project are approved (test-steps/$T.md). Write the Playwright \
 spec for it in tests/, then rehearse it against the QA org until every step passes, following the kit's rehearse-then-\
 record rules. Rehearse with: npm run qa -- $T  (QA_ROUND=R0 and QA_REASON=rehearsal are already set, and the harness \

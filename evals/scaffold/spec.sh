@@ -16,6 +16,9 @@ ln -s "$H/node_modules" node_modules
 rm -f tests/example.spec.ts
 mkdir -p stories test-steps docs
 cp "$FIX/project.md" .
+# The project's personas, and no test users: a spec compiles and lists without them. The org tier adds its own.
+cp "$FIX/personas.json" .
+rm -f test-users.local.json
 cp "$FIX/stories/$T.md" stories/
 cp "$FIX/approved/$T.md" "test-steps/$T.md"
 cp "$REPO"/docs/*.md docs/

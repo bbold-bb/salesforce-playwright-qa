@@ -12,7 +12,11 @@ These scripts show the build behaves right. Whether it was built as specified is
 | [tests/example.spec.ts](tests/example.spec.ts) | A working demo on the standard Case object: one flow of three steps on video, which runs in any sandbox with Cases |
 | [lib/config.ts](lib/config.ts) | Project settings: default org alias, the primary org for per-environment tickets, API version, record name prefix, evidence folder, time zone, and whether the ledger add-on is on |
 | [lib/salesforce.ts](lib/salesforce.ts) | Org lookups through the sf CLI, sign-in, Login As and switching user, the console tab cleanup, picklist and lookup helpers, the console, related list and record page helpers (see Console and report patterns, below), the report helpers, the URL and list view helpers (see Navigation and list views), the sandbox email switch, and the metadata and Setup Audit Trail reads for the run manifest |
-| [lib/evidence.ts](lib/evidence.ts) | Rounds, attempts and rehearsals, the recording lock, the evidence folder, flows and steps, screenshots, video, opening, chapter and caption cards, the rehearsal storyboard and failure snapshots, the run manifest, the run summary and the ledger rows |
+| [lib/evidence.ts](lib/evidence.ts) | Rounds, attempts and rehearsals, the evidence folder, flows and steps, screenshots, video, opening, chapter and caption cards, the rehearsal storyboard and failure snapshots, the run manifest, the run summary and the ledger rows |
+| [personas.json](personas.json) | Who the specs test as and the access each holds (see Test users) |
+| [lib/testUsers.ts](lib/testUsers.ts) | This machine's user for each persona, and the check that they exist before any spec starts |
+| [lib/runLock.ts](lib/runLock.ts) | The lock every run takes before any spec starts, so only one goes at a time |
+| [lib/videoCuts.ts](lib/videoCuts.ts) | Marks the waits in a video and cuts them once the run ends |
 | [playwright.config.ts](playwright.config.ts) | Installed Chrome, one worker, scenarios in order, Playwright's own videos and screenshots off, traces kept for failed tests only, in a folder per run that's never cleared |
 
 ## First-time setup
@@ -23,16 +27,91 @@ These scripts show the build behaves right. Whether it was built as specified is
 4. Install Google Chrome. The scripts use your installed Chrome, so no Playwright browser is downloaded.
 5. Authorize the sf CLI to the sandbox under an alias: `sf org login web -a my-partial-sandbox -r https://test.salesforce.com`. Set that alias as the default in `lib/config.ts`, or pass `SF_ORG` on each run.
 6. In the sandbox, turn on **Administrators Can Log in as Any User** (Setup, Login Access Policies).
-7. Create one test user per persona, with that persona's profile, permission sets and app. The scripts find users by full name, such as `Specialist Test User`, and test users should have `example.com` email addresses.
+7. Say who you test as in [personas.json](personas.json), then create your own test users with [test_users.py](../test_users.py) (see Test users, below). The two entries it ships with are examples on the Standard User profile.
 8. Check the app the persona uses. Log in as the test user once and open that app, or pass `appPath(...)` to `signInAs` as the example does.
 
 This folder has its own `package.json`, so it doesn't disturb any npm toolchain at the repository root.
 
 ## Signing in
 
-There are no passwords anywhere. Each run signs in as the sf CLI's admin user with a one-time URL from `sf org open --url-only`. It then uses Login As to become the test user, and confirms the switch from Lightning's own current user. It goes straight to the page the scenario starts on, so the video never shows Home or a list view. Nothing about the session is saved to disk, and a one-time sign-in URL in an error message is removed before it reaches the evidence.
+There are no passwords anywhere. Each run signs in as the sf CLI's admin user with a one-time URL from `sf org open --url-only`. It then uses Login As to become the test user (see Test users, below), and confirms the switch from Lightning's own current user. It goes straight to the page the scenario starts on, so the video never shows Home or a list view. Nothing about the session is saved to disk, and a one-time sign-in URL in an error message is removed before it reaches the evidence.
 
 Queries run through the sf CLI as the admin. Use them to confirm what the test user did, never to decide what the test user can see.
+
+## Test users
+
+Each tester has test users of their own, one for each person they test as. Two people testing in one sandbox then don't see each other's records, tabs and changes, and the evidence shows whose users tested.
+
+**Who to test as: [personas.json](personas.json).** Committed and shared by the team. An entry is usually a persona, but it can be anyone a story needs: a specialist with an add-on, a person with no access. It lists the access that person holds, by the names the org uses:
+
+```json
+{
+  "defaults": { "TimeZoneSidKey": "America/New_York", "LocaleSidKey": "en_US", "LanguageLocaleKey": "en_US", "EmailEncodingKey": "UTF-8" },
+  "personas": {
+    "Agent": {
+      "description": "Works Support Requests. Base access only, so the plain persona gets tested",
+      "profile": "Standard User",
+      "permission_set_groups": ["Support_Agent_Role"],
+      "public_groups": ["Support_Team"]
+    },
+    "AgentBilling": {
+      "description": "An agent with the billing add-on",
+      "profile": "Standard User",
+      "permission_set_groups": ["Support_Agent_Role"],
+      "permission_sets": ["Billing_Addon"],
+      "queues": ["Billing"]
+    },
+    "Supervisor": {
+      "profile": "Standard User",
+      "role": "Support_Supervisor",
+      "permission_set_groups": ["Support_Supervisor_Role"],
+      "user": { "UserPermissionsKnowledgeUser": true }
+    }
+  }
+}
+```
+
+| Key | What it names |
+| --- | --- |
+| `profile` | The profile, by name. Required |
+| `role` | The role, by developer name |
+| `permission_set_groups`, `public_groups`, `queues`, `permission_set_licenses` | Each by developer name |
+| `permission_sets` | Each by API name |
+| `user` | User fields that differ from `defaults`: time zone, locale, language, email encoding, and the Knowledge, Service Cloud, Flow and Marketing user checkboxes |
+
+To start an entry from a user that already holds the right access, print one: `python3 test_users.py --org my-partial-sandbox --from-user "Some User" --as Agent`. It prints access only, no one's name or email. Read it before you add it.
+
+**Create your set**, from the qa folder, with your own name:
+
+```bash
+python3 test_users.py --org my-partial-sandbox --tester "Ana P"
+python3 test_users.py --org my-partial-sandbox --tester "Ana P" --rehearse
+python3 test_users.py --org my-partial-sandbox --tester "Ana P" --apply
+python3 test_users.py --org my-partial-sandbox --tester "Ana P" --check
+```
+
+The first only reads, and shows the plan. `--rehearse` creates everything and undoes it. `--apply` creates it in one transaction and writes this machine's settings. `--check` compares the users with the file. `--rollback` deactivates the set and removes its access, since Salesforce users can't be deleted; `--apply` brings it back. `--persona Agent` limits any of them to one entry.
+
+| Part | What the script gives it |
+| --- | --- |
+| Name | `<entry>Test <tester>`: `AgentTest Ana P`. No test user's name may hold another's, since some checks match part of a name, so an entry can't end with another entry's name either |
+| Username | Made from the entry, the tester and the org's ID, so it's unique across Salesforce |
+| Email | `agenttest.anap@example.com`, never a real inbox. No password is set and no email is sent |
+| Licenses | The plan counts what the set takes against what's free and stops when short. Every tester takes a user license per entry, so a small sandbox can run out |
+
+**A spec names the entry, never a user:** `testUser('Agent')` ([lib/testUsers.ts](lib/testUsers.ts)) gives this machine's user, from `test-users.local.json`, which `--apply` writes (`--write-settings` writes it alone, on a second machine). It's gitignored and goes by org:
+
+```json
+{ "my-partial-sandbox": { "Agent": "AgentTest Ana P", "Supervisor": "SupervisorTest Ana P" } }
+```
+
+- **No set, no run.** An org with no entry, or a user the org doesn't have, stops the run before any spec starts and says what to run. It never falls back to someone else's user.
+- **Test Steps on a ticket name the persona,** so any tester can run them. The run summary (Signed in as, and Ran as on each step), `ran_as` in the evidence index, the run manifest and the cards name the user who ran them, and Testing Feedback's "ran as" does too.
+- **A recorded round keeps one set.** Its records belong to the users who made them, so another attempt with other users stops. A rehearsal may change sets.
+- **Rehearse after creating or changing a set.** New users start with fresh list view and console settings, and no default app.
+- **After a build changes a persona's access,** update `personas.json`, then each tester runs `--apply` and `--check`. `--apply` adds what's missing and never removes access the file doesn't list; `--check` reports it.
+- **Users don't move with a deployment.** Create the set again in each sandbox, and after a refresh.
+- **Still shared, whoever's users run:** org-wide settings such as email deliverability, and any config record a test changes for a run. The lock covers one machine only, so agree with the other testers before a run that does either.
 
 ## Run it
 
@@ -58,6 +137,7 @@ The last argument picks the spec file by name. Name each spec after its QA sub-t
 | `QA_LEDGER` | off | `QA_LEDGER=1` writes ledger rows and reads the ledger's Jira snapshot. Needs the [QA ledger add-on](../../../addons/qa-ledger/README.md) |
 | `QA_EVIDENCE_DIR` | `evidence/` in the qa folder, beside this one | Where the evidence goes. The build check, evidence index, publish script and ledger read the same folder |
 | `QA_TZ` | `UTC` | The time zone for dates in folder names, the run summary and the ledger |
+| `QA_WAIT` | `30` | The most minutes to wait while another run holds the lock. `QA_WAIT=0` stops at once (see One run at a time, below) |
 | `QA_PRIMARY_ORG` | `my-partial-sandbox` | The org whose QA sub-tasks the specs name, when each environment has its own (see Rounds and attempts) |
 | `SF_API_VERSION` | `62.0` | The API version for UI API calls |
 
@@ -97,9 +177,9 @@ A rehearsal also leaves three things a recorded round doesn't:
 | The storyboard | `storyboard.md`, rewritten each rehearsal | Every opening card, step card, caption and screenshot in the order a viewer meets them. Whoever approves the Test Steps approves the wording and the screenshot framing from it before the recorded run, so nothing is recorded again for wording |
 | A stop line | Printed at the end of the run | A step that has failed three rehearsals in a row. It isn't tried again: it goes to the approver with what the page showed and the options, such as another way to do the step or proving it by query |
 
-**Tab cleanup.** Before recording, a run closes every console tab that isn't one of this ticket's records: a Case whose Subject holds "QA <ticket>", or a record whose tab label does. Console tabs carry over between sessions, so a new ticket's video starts clear and shows only its own records, with nothing left from another ticket's run or from real data copied into the sandbox. `openRun` tells `closeNonTestTabs` the ticket.
+**Tab cleanup.** Before recording, a run closes every console tab that isn't one of this ticket's records: a Case whose Subject holds "QA <ticket>", or a record whose tab label does. Console tabs carry over between sessions, so a new ticket's video starts clear and shows only its own records, with nothing left from another ticket's run or from real data copied into the sandbox. The console restores tabs one by one, so the cleanup first waits until none is loading and the list has stopped changing. `openRun` tells `closeNonTestTabs` the ticket.
 
-**One recorded run at a time.** Recorded runs from two sessions at once share the test users, so each would show the other's records, tabs and changes in its videos. A recorded run takes a lock (`evidence/.recording.lock`) in `openRun` and gives it up when it ends; another recorded run started meanwhile stops before it does anything and names the run that holds it. A lock left by a run that died is taken over. Rehearsals don't take the lock. Each run keeps its traces in its own folder, so two at once don't clear each other's.
+**One run at a time on a machine, rehearsal or recorded.** Runs from two sessions share this machine's test users, so each would see the other's records, tabs and changes. Every `playwright test` command takes a lock (`evidence/.recording.lock`) before any spec starts and gives it up when the command ends. It's Playwright's global setup ([lib/runLock.ts](lib/runLock.ts)), so it covers every spec. A run that finds it held names the run that holds it, repeats that once a minute, and waits for up to 30 minutes (`QA_WAIT`); then it stops before any spec starts. `QA_WAIT=0` stops at once. Waiting runs go in no set order, and there is one lock for every org. A lock left by a run that died is taken over, so never delete it. Two testers on two machines don't wait for each other, because each has users of their own (Test users, above). Each run keeps its traces in its own folder.
 
 ## Email sending
 
@@ -129,6 +209,7 @@ evidence/
 - **Evidence per scenario.** Each scenario in `SCENARIOS` declares `evidence`: `screenshot` for what a user sees at one moment with no process to follow (report totals, a list view), `video` where the proof depends on actions or a rule firing (a save blocked, a record created end to end), or `query` where nothing runs as a user (save it with `saveQuery`). A scenario with a video doesn't also declare a screenshot, and not every scenario needs a video. How to choose is in [Writing Test Steps](../../../docs/writing-test-steps.md). `evidence-index.csv` lists what each scenario needs and has, and publishing stops on anything missing.
 - **Screenshots** are named by ticket and scenario. A scenario that covers several records gets one per record, lettered (S5a, S5b), and the run summary says which is which. A screenshot is full page when the page is at the top. When the page has scrolled, or a picklist is open, it's the visible window, because Lightning's fixed header lands mid-image in a full-page capture of a scrolled page.
 - **Videos** are one per flow or standalone scenario that declares one, slowed to a pace a person can follow. Each flow video opens with its opening card, then a chapter card per step, and a pointer and outline mark each element as it's used. The format is WebM with VP9, which Chrome plays. Check that your shared storage's preview plays it before you rely on it.
+- **Dead time is cut from a video.** Wrap a wait that's nothing to watch in `waiting(() => ...)` ([lib/videoCuts.ts](lib/videoCuts.ts)): mail arriving, a page loading. The email switch marks its own. Once the run ends, each marked wait is cut to a second at each end; cards, results and the time Salesforce takes after a click stay whole. Never wrap the step's own action or result. The run summary says how much was cut, and the uncut video stays on this machine in `attempts/A<n>-uncut/`. It needs `ffmpeg` on the path (`brew install ffmpeg`); without it the video stays as recorded.
 - **The run summary** lists every attempt in the round with its reason and note, each scenario's result and its attempts, what changed before the latest attempt, what was seen, and links to the records used, ready for the Testing Feedback entry.
 - **The run manifest** records, for each attempt: the script's commit and any uncommitted edits, the Jira items' last update and sprint (from the ledger's Jira snapshot, when the ledger is on), the build's metadata as the spec collects it, and the org's Setup changes since the last run of the same QA sub-task (Setup Audit Trail, user management left out). It compares that with the last run and lists what differs. That list tells a build change from a script change.
 - **Sharing.** Watch the videos first; each should show its scenario clearly and only test records. Then, from the qa folder, run [`publish.sh`](../publish.sh) with the round's folder. It runs [`evidence_index.py`](../evidence_index.py) to check every scenario has the evidence it declares, then copies the round's final evidence and the QA sub-task's newest build check into the Drive folder that Google Drive for desktop syncs, and never deletes anything there. Earlier attempts, run manifests, `results.json` and the ledger stay on this machine, and the shared run summary leaves out the attempts and the test tooling ([shared_summary.py](../shared_summary.py)). Link the QA sub-task's Drive folder from its Testing Feedback entry.
@@ -164,6 +245,12 @@ How a Lightning console app and reports behave under a script. Each has a helper
 | A report runs inside the Report Viewer frame | `openReportFromFolder` opens it through All Folders and waits for Total Records; `reportViewer` for a report opened another way; `reportTotal` reads its total |
 | A report groups on a lookup's field under the lookup's name, such as "Owner: Full Name", not the field label | Check the grouping by that name |
 | A report draws its rows as they scroll into view, so a later group isn't on the page yet; each group cell is named "<grouping>: <value>" | `hideDetailRows` switches Detail Rows off (not saved) so every group shows; `reportGroup` finds one |
+| A report's date range is changed on its run page from the Filters panel: each filter is a button "Edit Filter <field> <value>", and the date one opens "Filter by <field>" with a Range text box listing ranges such as This Month. A tabular report shows no Total Records, so `openReportFromFolder` waits for it in vain: open it by `reportPath` and wait for its grid | `setReportDateRange` |
+| A report's run page draws its rows as you scroll, so a row near the end of a long report isn't on the page and `getByText` never finds it | `scrollReportTo(grid, text)` |
+| A screen flow's radio group and checkbox group draw a box over each input that takes the pointer: `check()` and a mouse click at the input's spot both leave it unchanged | `pickAnswer` and `tickItem` click the words, as a person does, and confirm the result |
+| A validation rule whose message sits on a field on another tab shows on save only as a pop-up naming the field; the message itself shows once that tab is opened | Close the pop-up and open the tab |
+| An org query holds up the recording while it runs, so the step before it looks slow | Wait for the result on screen first, `beat`, then query |
+| The text to check can be on more than one page: a console keeps earlier records in the page behind, and a record can repeat an email's text | Check it in the page or frame it belongs to, such as the email's own frame |
 | A flow screen's data table with one-row selection draws its own radio over the real one, which takes the click; a click at the radio's spot only focuses the cell, and the table selects the row on Space | Click the radio's position with the mouse, press Space if it isn't checked, and confirm `toBeChecked` |
 | Setup's Deliverability page runs inside a frame, and a Lightning pop-up can cover the frame's Save | `setEmailAccess` works inside the frame, saves, then reloads and reads the saved value back rather than trusting the click |
 | A Dynamic Forms section hidden by a visibility rule isn't rendered at all | `recordSection` finds a section by its heading; `toHaveCount(0)` means the record type doesn't show it |
@@ -218,7 +305,7 @@ npx playwright trace close
 Write and approve the QA sub-task's Test Steps first: how to draft them from the story, the Coverage section, keeping steps simple, evidence tags and grouping steps into flows are in [Writing Test Steps](../../../docs/writing-test-steps.md). The script then implements the approved steps as written. The mechanics:
 
 1. Copy [templates/story.spec.ts](templates/story.spec.ts) to `tests/<QA sub-task>.spec.ts` and keep its shape, not an older spec's, which may predate a rule. When a rule here changes, the template changes in the same commit.
-2. Fill in its settings block: `TICKET` (through `qaTicket`), `PARENT` (its story or Task), `EPIC_FOLDER`, `TICKET_FOLDER`, the test users, and what the story builds, by label and API name.
+2. Fill in its settings block: `TICKET` (through `qaTicket`), `PARENT` (its story or Task), `EPIC_FOLDER`, `TICKET_FOLDER`, who it runs as (`testUser('<entry in personas.json>')`), and what the story builds, by label and API name.
 3. List the steps in `SCENARIOS`, in the ticket's words, each with the evidence tag the ticket gives it. Steps in a flow carry `flow: 'F<n>'`.
 4. Have `buildSnapshot` collect the metadata the story builds, so the next run can say what changed.
 5. Write the tests: `openRun` and `writeManifest` in `beforeAll`, then one test per flow (`startFlow`, `signInAs`, `startVideo`, `openingCard`, then a `chapter` and `step` per step, and `stopVideo`) or per standalone step (`standalone('S<n>')`, `step`, and `shot` or `saveQuery`), and `finishRun` in `afterAll`.

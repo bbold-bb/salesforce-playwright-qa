@@ -8,6 +8,7 @@ import {
   Run, Scenario, ScenarioResult, openRun, keepEarlierEvidence, writeManifest, recordCatalog, finishRun, startFlow, step,
   startVideo, stopVideo, openingCard, chapter, caption, beat, saveQuery,
 } from '../lib/evidence';
+import { testUser } from '../lib/testUsers';
 
 const TICKET = 'ACME-11';
 const PARENT = 'ACME-11';
@@ -16,7 +17,7 @@ const TICKET_FOLDER = 'ACME-11 E1.1 Contact Channel';
 const ROUND = process.env.QA_ROUND ?? '';
 const PREFIX = `QA ${TICKET} ${ROUND}`;
 const TOTAL_STEPS = 4;
-const AGENT = 'Support Agent Test User';
+const AGENT = testUser('SupportAgent');
 const TYPE = { label: 'Support Request', api: 'Support_Request' };
 const FIELD = { label: 'Contact Channel', api: 'Contact_Channel__c', value: 'Email' };
 const FOLDER = 'Support Reports';

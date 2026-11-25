@@ -22,18 +22,11 @@ echo "org-up: deploying the fixture metadata"
 sf project deploy start --source-dir force-app --target-org "$ALIAS" --wait 30 --json > "$OUT/org-deploy.json"
 
 echo "org-up: creating the test users"
-python3 - "$ALIAS" <<'PY'
-import json, subprocess, sys, time
-alias = sys.argv[1]
-for i, u in enumerate(json.load(open("users.json"))):
-    name = f"{u['alias']}.{int(time.time())}{i}@acme-evals.example"
-    subprocess.run(["sf", "org", "create", "user", "--target-org", alias, f"username={name}",
-                    f"firstName={u['firstName']}", f"lastName={u['lastName']}", f"alias={u['alias']}",
-                    f"profileName={u['profile']}", "--json"], check=True, capture_output=True)
-    for ps in u["permsets"]:
-        subprocess.run(["sf", "org", "assign", "permset", "--name", ps, "--target-org", alias, "--on-behalf-of", name,
-                        "--json"], check=True, capture_output=True)
-PY
+# The kit's own script, as a tester would run it. The settings it writes are copied into each run's folder (run.sh).
+USERS=(python3 "$REPO/templates/qa/test_users.py" --org "$ALIAS" --tester "Eval A" --persona SupportAgent
+       --personas "$REPO/evals/fixtures/acme-support/personas.json" --settings "$OUT/test-users.local.json")
+"${USERS[@]}" --apply
+"${USERS[@]}" --check || exit 3
 
 echo "org-up: first sign-in (a new org's first Lightning load is slow)"
 NODE_PATH="$REPO/templates/qa/playwright/node_modules" node "$REPO/evals/org/warm.cjs" "$ALIAS"
@@ -53,10 +46,6 @@ if not vr or not vr[0]["Active"]:
     problems.append("validation rule Resolution_Summary_Required")
 if not sf("data", "query", "--query", "SELECT Id FROM Report WHERE DeveloperName = 'Cases_by_Contact_Channel'")["records"]:
     problems.append("report Cases_by_Contact_Channel")
-for u in json.load(open("users.json")):
-    full = f"{u['firstName']} {u['lastName']}"
-    if not sf("data", "query", "--query", f"SELECT Id FROM User WHERE Name = '{full}' AND IsActive = true")["records"]:
-        problems.append(f"user {full}")
 if problems:
     print("org-up: setup check failed:", ", ".join(problems))
     sys.exit(1)

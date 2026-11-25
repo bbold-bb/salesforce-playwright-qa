@@ -11,10 +11,12 @@ An invented Salesforce Service Cloud project, used only by the QA evals. Nothing
 
 ## Test users
 
-| Test user | Persona | Role | Permission sets |
-| --- | --- | --- | --- |
-| Support Agent Test User | A first-line support agent who works Support Requests | Support Agent | Support Agent |
-| Support Supervisor Test User | A supervisor who takes escalated cases | Support Supervisor | Support Agent, Tier 2 Access |
+Each tester has their own set, so a spec names the entry in `personas.json`, never a user.
+
+| Test user | Entry in `personas.json` | Persona | Role | Permission sets |
+| --- | --- | --- | --- | --- |
+| Support Agent Test User | `SupportAgent` | A first-line support agent who works Support Requests | Support Agent | Support Agent |
+| Support Supervisor Test User | `SupportSupervisor` | A supervisor who takes escalated cases | Support Supervisor | Support Agent, Tier 2 Access |
 
 ## How QA works here
 

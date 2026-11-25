@@ -11,7 +11,7 @@ For who does what at each stage, see [how-test-steps-flow.md](how-test-steps-flo
 Before any script, Claude drafts the QA sub-task's Test Steps from the story's acceptance criteria and the story's own Test Steps:
 
 - Step 1 is the build check.
-- The other steps are grouped into flows. Each flow names the test user it runs as, and each step names the criterion it tests and its evidence tag.
+- The other steps are grouped into flows. Each flow names the persona it runs as, never one tester's user, so any tester can run it, and each step names the criterion it tests and its evidence tag.
 - The steps end with a Coverage section.
 
 The Solution Architect approves that text, and the script implements it as written. How a screen behaves (where a button hides, how a list loads) goes into the harness helpers, never into the steps.
@@ -100,7 +100,7 @@ Paste this into the QA sub-task's Test Steps field and fill it in. Keep the tags
 1. Build check [Build check]
    Compare the org with the build sub-task's spec (PROJ-20): <what the build adds or changes>.
 
-Flow F1, as <persona test user, for example Specialist Test User>
+Flow F1, as <persona, for example Specialist>
 2. <What the user does, in plain words>. Expected: <one result>. Criterion 1. [Video]
 3. <What the user does>. Expected: <one result>. Criterion 2. [Video]
 

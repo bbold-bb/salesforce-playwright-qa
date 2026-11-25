@@ -71,6 +71,12 @@ class Rules(unittest.TestCase):
         text = GOOD.replace("      expect(query(`SELECT Id FROM Case WHERE Id = '${id}' AND ${FIELD.api} = '${FIELD.value}'`)).toHaveLength(1);\n", "")
         self.assertEqual(failed(text), ["query-per-step"])
 
+    def test_bad_typed_user(self):
+        self.assertEqual(failed(GOOD.replace("testUser('SupportAgent')", "'Support Agent Test User'")), ["no-typed-user", "test-user-by-persona"])
+
+    def test_bad_persona_not_through_test_user(self):
+        self.assertEqual(failed(GOOD.replace("testUser('SupportAgent')", "'SupportAgentTest Ana P'")), ["test-user-by-persona"])
+
     def test_query_through_a_helper_of_a_helper_counts(self):
         text = GOOD.replace("const standalone =", "const channelOf = (id: string) => String(one(id)?.Contact_Channel__c ?? '');\nconst standalone =")
         text = text.replace("expect(one(id)[FIELD.api]).toBe(FIELD.value);", "expect(channelOf(id)).toBe(FIELD.value);")
@@ -87,7 +93,8 @@ class Compile(unittest.TestCase):
         cls.tmp = Path(tempfile.mkdtemp())
         cls.harness = cls.tmp / "playwright"
         src = REPO / "templates/qa/playwright"
-        shutil.copytree(src, cls.harness, ignore=shutil.ignore_patterns("node_modules", "test-results"))
+        shutil.copytree(src, cls.harness, ignore=shutil.ignore_patterns("node_modules", "test-results", "test-users.local.json"))
+        shutil.copy(REPO / "evals/fixtures/acme-support/personas.json", cls.harness / "personas.json")
         (cls.harness / "node_modules").symlink_to(src / "node_modules")
 
     @classmethod

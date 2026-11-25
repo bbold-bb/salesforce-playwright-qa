@@ -19,7 +19,7 @@ Each case runs 3 times. A run's score combines three kinds of check:
 | Tier | Hard checks |
 | --- | --- |
 | `steps` | Step 1 is the build check. Every step has one evidence tag and names a criterion. Coverage lists every criterion and no extra. Each criterion is proven with an evidence tag the answer key allows. Flows run only as users the story needs, and no more flows than it needs. A criterion tested elsewhere names that ticket. A drifted value from the build sub-task doesn't appear outside the build check |
-| `spec` | `SCENARIOS` matches the approved steps (ids, flows, evidence). Every flow has an opening card, and every video step a chapter card. No XPath, CSS class, id or position locators. No `test.skip`, `test.fixme`, `test.only` or `storageState`. Records use the `QA <ticket> <round>` prefix. Every step checks by query. It compiles (TypeScript, strict) and `playwright test --list` shows each flow and standalone step |
+| `spec` | `SCENARIOS` matches the approved steps (ids, flows, evidence). Every flow has an opening card, and every video step a chapter card. No XPath, CSS class, id or position locators. No `test.skip`, `test.fixme`, `test.only` or `storageState`. Records use the `QA <ticket> <round>` prefix. Every step checks by query. It runs as `testUser('<persona>')`, with no user's name typed. It compiles (TypeScript, strict) and `playwright test --list` shows each flow and standalone step |
 | org | The rehearsal's own `results.json` shows every step passing, the stop rule never fired, and the final spec still passes the spec rules above. The number of rehearsal attempts is reported, not scored |
 
 A case **passes when its average score is at least 2/3** (it holds on 2 of 3 runs). `check.py` exits 1 if any case fails.
@@ -55,7 +55,7 @@ The runner's HTML report is never published: `run.sh` always passes `--no-publis
 
 ## The org tier
 
-`evals/org/run.sh` builds a throwaway scratch org from the fixture project in `fixtures/acme-support/sfdx/` (`org-up.sh`): it deploys the metadata, creates the test users, signs in once to warm the org up, and runs a setup check. A setup failure is reported as "setup failed" and nothing is scored. Then, for each story and run, Claude works in its own copy of the harness, writing the spec and rehearsing it until it passes. The scratch org is deleted at the end, even after Ctrl-C (`org-down.sh`, which only deletes orgs whose alias starts `qa-evals-`).
+`evals/org/run.sh` builds a throwaway scratch org from the fixture project in `fixtures/acme-support/sfdx/` (`org-up.sh`): it deploys the metadata, creates the test users with the kit's own `test_users.py`, signs in once to warm the org up, and runs a setup check. A setup failure is reported as "setup failed" and nothing is scored. Then, for each story and run, Claude works in its own copy of the harness, writing the spec and rehearsing it until it passes. The scratch org is deleted at the end, even after Ctrl-C (`org-down.sh`, which only deletes orgs whose alias starts `qa-evals-`).
 
 It runs outside `claude plugin eval`, because the runner's sealed runs have no network, no sf CLI and none of your sign-ins. So the org tier runs as you, on your machine:
 

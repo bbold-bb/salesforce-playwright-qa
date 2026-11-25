@@ -53,7 +53,8 @@ class SpecTier(unittest.TestCase):
     def setUpClass(cls):
         cls.ws = Path(tempfile.mkdtemp())
         src = FIX.parent.parent.parent / "templates" / "qa" / "playwright"
-        shutil.copytree(src, cls.ws, dirs_exist_ok=True, ignore=shutil.ignore_patterns("node_modules", "test-results"))
+        shutil.copytree(src, cls.ws, dirs_exist_ok=True, ignore=shutil.ignore_patterns("node_modules", "test-results", "test-users.local.json"))
+        shutil.copy(FIX / "personas.json", cls.ws / "personas.json")
         (cls.ws / "node_modules").symlink_to(src / "node_modules")
 
     @classmethod
