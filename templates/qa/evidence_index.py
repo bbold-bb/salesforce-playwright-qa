@@ -46,6 +46,8 @@ def index(round_dir: Path):
         rows.append({
             "scenario": r["id"], "title": r["title"], "flow": r.get("flow") or "",
             "result": "not run" if r.get("passed") is None else "pass" if r["passed"] else "fail",
+            # The test users signed in while the step ran: blank for a query or the admin.
+            "ran_as": "; ".join(r.get("ranAs") or []),
             "needs": " + ".join(declared),
             "screenshots": "; ".join(has["screenshot"]), "video": "; ".join(has["video"]), "query_output": "; ".join(has["query"]),
             "missing": " + ".join(missing),

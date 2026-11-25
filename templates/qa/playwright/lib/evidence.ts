@@ -3,7 +3,9 @@ import path from 'path';
 import { execFileSync } from 'child_process';
 import { Page, test } from '@playwright/test';
 import { ORG_ALIAS, ORG_PREFIX_TO_DROP, EVIDENCE_DIR, TIME_ZONE, LEDGER_ENABLED } from './config';
-import { openPages, setupChangesSince, setRunTicket } from './salesforce';
+import { openPages, setupChangesSince, setRunTicket, signedInNow, signInsSoFar } from './salesforce';
+import { cutVideos, videoStarted, videoStopped } from './videoCuts';
+import { TestUserSet, testUserSet, usersDiffer } from './testUsers';
 
 // evidence/<epic>/<QA sub-task>/<date> <org> <round>/{screenshots,videos,queries,attempts,run-summary.md}
 // evidence/rehearsal/<QA sub-task>/ holds practice runs, and evidence/qa-ledger/ the optional ledger. A reviewed round
@@ -45,6 +47,8 @@ export type ScenarioResult = Scenario & {
   links: { label: string; url: string }[];
   screenshots: string[];
   attempt?: number;
+  // The test users signed in while the step ran. Empty for a step that ran as the admin or as a query.
+  ranAs?: string[];
   history?: { attempt: number; passed?: boolean; seconds?: number }[];
 };
 
@@ -59,11 +63,14 @@ type Attempt = {
   changes?: string[];
   closedTabs?: string[];
   evidenceKept?: boolean;
+  users?: string[]; // the test users signed in during this attempt
+  videoCuts?: string[]; // waiting cut out of this attempt's videos (lib/videoCuts.ts)
   // Email sending switched on for this attempt's sends (lib/salesforce.ts, withEmailOpen): total seconds and sends.
   email?: { seconds: number; sends: number };
 };
 
-type Store = { header: string[]; attempts: Attempt[]; results: ScenarioResult[]; dropped?: ScenarioResult[] };
+// testUsers: the users the round's attempts ran as (lib/testUsers.ts). A round from before this was recorded ran as the shared users.
+type Store = { header: string[]; attempts: Attempt[]; results: ScenarioResult[]; dropped?: ScenarioResult[]; testUsers?: TestUserSet };
 
 export type Run = {
   ticket: string;
@@ -84,31 +91,6 @@ export type Run = {
 const localIso = (d: Date) => d.toLocaleString('sv-SE', { timeZone: TIME_ZONE }).replace(' ', 'T');
 const localText = (d: Date) => d.toLocaleString('en-US', { timeZone: TIME_ZONE, timeZoneName: 'short' });
 
-// One recorded run at a time. Recorded runs from two sessions at once share the test users, so each could see the
-// other's records, tabs and changes in its videos. A recorded (non-rehearsal) run takes this lock in openRun and gives
-// it up when its process ends; another recorded run started meanwhile stops with who holds it. A lock left by a run
-// that died is taken over, since its process is gone. Rehearsals don't take it.
-const LOCK = path.join(EVIDENCE, '.recording.lock');
-function takeRecordingLock(ticket: string, round: string) {
-  if (fs.existsSync(LOCK)) {
-    const held = JSON.parse(fs.readFileSync(LOCK, 'utf8'));
-    let alive = false;
-    // kill(pid, 0) only asks whether the process exists; EPERM means it does, under another user.
-    try { process.kill(held.pid, 0); alive = held.pid !== process.pid; } catch (e: any) { alive = e?.code === 'EPERM'; }
-    if (alive) {
-      throw new Error(`Another recorded run is in progress (${held.ticket} ${held.round}, started ${held.started}). ` +
-        'Record one ticket at a time: wait for it to finish, then run this again.');
-    }
-  }
-  fs.mkdirSync(EVIDENCE, { recursive: true });
-  fs.writeFileSync(LOCK, JSON.stringify({ ticket, round, pid: process.pid, started: localText(new Date()) }));
-  process.on('exit', () => {
-    try {
-      if (JSON.parse(fs.readFileSync(LOCK, 'utf8')).pid === process.pid) fs.unlinkSync(LOCK);
-    } catch { /* already gone */ }
-  });
-}
-
 // Opens this run's round folder. A first-run, retest-after-fix, story-changed or regression-after-deployment
 // run starts a new round folder; a script-fix, steps-changed, flaky or tooling-check run is another attempt in the
 // round's existing folder. A rehearsal (QA_ROUND=R0 QA_REASON=rehearsal) goes to evidence/rehearsal/ instead.
@@ -128,7 +110,6 @@ export function openRun(opts: { ticket: string; epicFolder: string; ticketFolder
         'a real run uses R1 or later and another reason.',
     );
   }
-  if (reason !== REHEARSAL) takeRecordingLock(ticket, round);
   setRunTicket(ticket);
   const ticketDir = path.join(EVIDENCE, opts.epicFolder, opts.ticketFolder);
   fs.mkdirSync(ticketDir, { recursive: true });
@@ -159,6 +140,13 @@ export function openRun(opts: { ticket: string; epicFolder: string; ticketFolder
     const date = started.toLocaleDateString('en-CA', { timeZone: TIME_ZONE });
     dir = path.join(ticketDir, `${date} ${ORG_SHORT} ${round}`);
     store = { header: [], attempts: [], results: [] };
+  }
+  // A round's records belong to the users who made them, and its "Run as" line is written once, so a recorded round keeps
+  // one set of users. Rehearsals may change sets; finishRun rewrites their header.
+  const moved = store.attempts.length ? usersDiffer(store.testUsers, testUserSet) : [];
+  if (moved.length && reason !== REHEARSAL) {
+    throw new Error(`${round} ran as other test users, and a round keeps one set (now ${moved.join(', ')}). Put test-users.local.json ` +
+      'back to run in this round, or start a new round.');
   }
   fs.mkdirSync(path.join(dir, 'screenshots'), { recursive: true });
   fs.mkdirSync(path.join(dir, 'videos'), { recursive: true });
@@ -243,6 +231,8 @@ export function startFlow(run: Run, scenarios: Scenario[], flow: string, results
 // points at the step in the spec rather than inside a helper.
 export async function step(r: ScenarioResult, body: () => Promise<void>) {
   const started = Date.now();
+  const before = signedInNow();
+  const signIns = signInsSoFar().length;
   board(`\n## ${r.id} ${r.title}\n\nExpected: ${r.expected}\n`);
   try {
     await test.step(`${r.id} ${r.title}`, body, { box: true, subtitle: `Expected: ${r.expected}` });
@@ -259,6 +249,7 @@ export async function step(r: ScenarioResult, body: () => Promise<void>) {
     await failureSnapshot(r, message.split('\n').filter((l) => l.trim()).slice(0, 8).join('\n# '));
     throw e;
   } finally {
+    r.ranAs = [...new Set([...before, ...signInsSoFar().slice(signIns)])].sort();
     r.seconds = Math.round((Date.now() - started) / 1000);
   }
 }
@@ -274,7 +265,9 @@ export async function beat(page: Page, ms = 1200) {
 // each element as it's used.
 export async function startVideo(page: Page, dir: string, name: string) {
   if (!VIDEO) return;
-  await page.screencast.start({ path: path.join(dir, 'videos', `${name}.webm`), size: { width: 1600, height: 1000 } });
+  const file = path.join(dir, 'videos', `${name}.webm`);
+  await page.screencast.start({ path: file, size: { width: 1600, height: 1000 } });
+  videoStarted(file);
   await page.screencast.showActions({
     duration: 1200,
     position: 'top-right',
@@ -287,6 +280,7 @@ export async function startVideo(page: Page, dir: string, name: string) {
 
 export async function stopVideo(page: Page) {
   if (!VIDEO) return;
+  videoStopped();
   await page.screencast.stop();
 }
 
@@ -395,6 +389,7 @@ type Manifest = {
   script: { commit: string; uncommittedEdits: string[] };
   jira: Record<string, { updated: string; sprint: string; snapshot: string } | null>;
   metadata: Record<string, unknown>;
+  testUsers?: TestUserSet;
   setupChangesSinceLastRun: { when: string; by: string; section: string; what: string }[];
   comparedWith: string;
   changes: string[];
@@ -443,6 +438,7 @@ export function writeManifest(run: Run, parent: string, metadata: Record<string,
     },
     jira,
     metadata,
+    testUsers: testUserSet,
     setupChangesSinceLastRun: prev ? setupChangesSince(prev.startedUtc) : [],
     comparedWith: prev?.runId ?? '',
     changes: [],
@@ -465,6 +461,8 @@ export function writeManifest(run: Run, parent: string, metadata: Record<string,
       const b = JSON.stringify(m.metadata[key]);
       if (a !== b) changes.push(`Metadata changed, ${key}: ${short(prev.metadata[key])} to ${short(m.metadata[key])}.`);
     }
+    const moved = usersDiffer(prev.testUsers, m.testUsers);
+    if (moved.length) changes.push(`Test users changed: ${moved.join(', ')}.`);
     const setup = m.setupChangesSinceLastRun;
     if (setup.length) {
       changes.push(`${setup.length} Setup change${setup.length === 1 ? '' : 's'} in the org since the last run (Setup Audit Trail, user management left out):`);
@@ -518,12 +516,14 @@ export function finishRun(
   extra: { changes: string[]; closedTabs: string[]; dropped?: string[]; email?: { seconds: number; sends: number } },
 ) {
   const seconds = Math.round((Date.now() - run.started.getTime()) / 1000);
+  const videoCuts = cutVideos(path.join(run.dir, 'attempts', `A${run.attempt}-uncut`));
   const store = run.store;
-  if (!store.header.length) store.header = header;
+  if (!store.header.length || usersDiffer(store.testUsers, testUserSet).length) store.header = header;
+  store.testUsers = testUserSet;
   store.attempts.push({
     attempt: run.attempt, reason: run.reason, note: run.note, startedLocal: localText(run.started), seconds,
     scenarios: fresh.map((r) => r.id), method: 'playwright', changes: extra.changes, closedTabs: extra.closedTabs,
-    evidenceKept: true, ...(extra.email ? { email: extra.email } : {}),
+    evidenceKept: true, users: [...new Set(signInsSoFar())].sort(), ...(videoCuts.length ? { videoCuts } : {}), ...(extra.email ? { email: extra.email } : {}),
   });
   for (const r of fresh) {
     let before = store.results.find((e) => e.id === r.id);
@@ -578,6 +578,9 @@ export function finishRun(
 
 export function writeSummary(dir: string, title: string, round: string, store: Store) {
   const lines = [`# ${title}, ${round}`, '', ...store.header];
+  const users = [...new Set(store.results.flatMap((r) => r.ranAs ?? []))].sort();
+  if (users.length) lines.push(`- **Signed in as:** ${users.join(', ')}`);
+  for (const cut of store.attempts[store.attempts.length - 1]?.videoCuts ?? []) lines.push(`- **Video:** ${cut}`);
   const emailed = store.attempts.filter((a) => a.email);
   if (emailed.length) {
     const secs = emailed.reduce((n, a) => n + a.email!.seconds, 0);
@@ -605,6 +608,7 @@ export function writeSummary(dir: string, title: string, round: string, store: S
   }
   for (const r of store.results) {
     lines.push('', `## ${r.id} ${r.title}`, '', `Expected: ${r.expected}`, '');
+    if (r.ranAs?.length) lines.push(`- Ran as ${r.ranAs.join(', ')}`);
     for (const s of r.seen) lines.push(`- ${s}`);
     if (r.links.length) {
       lines.push('', 'Records:');

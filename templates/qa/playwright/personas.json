@@ -1,0 +1,18 @@
+{
+  "defaults": {
+    "TimeZoneSidKey": "America/New_York",
+    "LocaleSidKey": "en_US",
+    "LanguageLocaleKey": "en_US",
+    "EmailEncodingKey": "UTF-8"
+  },
+  "personas": {
+    "Specialist": {
+      "description": "Example: works cases. Replace the profile and access with your project's",
+      "profile": "Standard User"
+    },
+    "Supervisor": {
+      "description": "Example: reviews the specialists' cases. Replace the profile and access with your project's",
+      "profile": "Standard User"
+    }
+  }
+}

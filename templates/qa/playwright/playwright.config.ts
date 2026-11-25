@@ -26,6 +26,8 @@ const runFolder = [runTickets.join(' ') || 'run', process.env.QA_ROUND, process.
 
 export default defineConfig({
   testDir: './tests',
+  // Before any spec starts: checks this machine's test users, then takes the run lock or waits for it.
+  globalSetup: ['./lib/testUsers.ts', './lib/runLock.ts'],
   workers: 1,
   fullyParallel: false,
   retries: 0,

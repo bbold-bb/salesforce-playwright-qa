@@ -31,6 +31,7 @@ import {
   Run, Scenario, ScenarioResult, openRun, keepEarlierEvidence, writeManifest, recordCatalog, finishRun, startFlow, step,
   startVideo, stopVideo, openingCard, chapter, caption, shot, beat, saveQuery,
 } from '../lib/evidence';
+import { testUser } from '../lib/testUsers';
 
 // TODO: the QA sub-task, its story or Task, and the evidence folders (the QA sub-task's key and title).
 const TICKET = qaTicket('PROJ-000');
@@ -40,9 +41,10 @@ const TICKET_FOLDER = `${TICKET} E0.0 Story name`;
 const ROUND = process.env.QA_ROUND ?? '';
 const PREFIX = `${RECORD_PREFIX} ${TICKET} ${ROUND}`;
 const TOTAL_STEPS = 5; // the ticket's Test Steps, the build check included
-// TODO: the fewest users the criteria need, by full name. A second user only when a criterion is about a second person.
-const SPECIALIST = 'Specialist Test User';
-const SUPERVISOR = 'Supervisor Test User';
+// TODO: the fewest users the criteria need. A second user only when a criterion is about a second person. Each is an entry
+// in personas.json and becomes this machine's user for it (README.md, Test users), so never type a user's name.
+const SPECIALIST = testUser('Specialist');
+const SUPERVISOR = testUser('Supervisor');
 // TODO: what the story builds, by label as a user reads it and by API name for queries.
 const TYPE = { label: 'Support Request', api: 'Support_Request' }; // a Case record type
 const FIELD = { label: 'Product Line', api: 'Product_Line__c', value: 'Hardware' };

@@ -18,13 +18,14 @@ import {
   Run, Scenario, ScenarioResult, openRun, writeManifest, recordCatalog, finishRun, startFlow, step,
   startVideo, stopVideo, openingCard, chapter, beat,
 } from '../lib/evidence';
+import { testUser } from '../lib/testUsers';
 
 // --- This story's settings ---------------------------------------------------------------------------------------
 const TICKET = qaTicket('PROJ-21');                       // the QA sub-task (qaTicket: see lib/salesforce.ts)
 const PARENT = 'PROJ-20';                                 // its story or Task, for the run manifest
 const EPIC_FOLDER = 'E1 Example Epic';                    // evidence folder for the epic
 const TICKET_FOLDER = 'PROJ-21 E1.1 Example Case intake'; // evidence folder for the QA sub-task
-const TEST_USER = 'Specialist Test User';                 // the persona's test user, by full name
+const TEST_USER = testUser('Specialist');                 // this machine's user for the persona (personas.json)
 // The app's label as users see it (appPath also takes its developer name). If the project builds a custom console
 // app, use its label, not the standard one's.
 const APP = 'Service Console';
@@ -41,7 +42,7 @@ const PREFIX = `${RECORD_PREFIX} ${TICKET} ${ROUND}`;
 // The steps in the QA sub-task's Test Steps, with each one's evidence tag as approved. A step on video declares no
 // screenshot. With the ledger add-on on, its catalog is written from this list.
 const SCENARIOS: Scenario[] = [
-  { id: 'S1', flow: 'F1', title: `${TEST_USER} lands in ${APP}`, expected: `${APP} opens`, evidence: ['video'] },
+  { id: 'S1', flow: 'F1', title: `The specialist lands in ${APP}`, expected: `${APP} opens`, evidence: ['video'] },
   {
     id: 'S2', flow: 'F1', title: 'New Case offers the expected Status values',
     expected: EXPECTED_STATUSES ? `Status offers ${EXPECTED_STATUSES.join(', ')}` : 'Status offers only active Status values',

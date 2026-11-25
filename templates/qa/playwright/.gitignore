@@ -12,3 +12,5 @@ playwright/.cache/
 # Playwright CLI sessions and output: page snapshots and the browser profile, signed in.
 .playwright-cli/
 .playwright/
+# This machine's own test users (README.md, Test users).
+test-users.local.json

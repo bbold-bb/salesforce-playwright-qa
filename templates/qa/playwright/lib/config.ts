@@ -37,6 +37,10 @@ export const EVIDENCE_DIR = process.env.QA_EVIDENCE_DIR ?? path.join(__dirname, 
 // late-evening run doesn't land in tomorrow's folder.
 export const TIME_ZONE = process.env.QA_TZ ?? 'UTC'  // set QA_TZ (or this default) to your team's zone, for example 'America/Chicago';
 
+// Who the specs test as, shared by the team, and this machine's user for each (lib/testUsers.ts).
+export const PERSONAS_FILE = path.join(__dirname, '..', 'personas.json');
+export const TEST_USERS_FILE = path.join(__dirname, '..', 'test-users.local.json');
+
 // The QA ledger is an optional add-on (addons/qa-ledger in the kit, copied to <qa folder>/ledger/). Off by default:
 // runs write no ledger rows and read no Jira snapshot. QA_LEDGER=1 turns it on. Everything else works without it.
 export const LEDGER_ENABLED = process.env.QA_LEDGER === '1';

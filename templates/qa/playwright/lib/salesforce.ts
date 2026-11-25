@@ -1,6 +1,8 @@
 import { execFileSync } from 'child_process';
 import * as fs from 'fs';
 import { Browser, BrowserContext, FrameLocator, Locator, Page, expect } from '@playwright/test';
+import { waiting } from './videoCuts';
+import { checkSetUp } from './testUsers';
 import { ORG_ALIAS, API_VERSION, RECORD_PREFIX, PRIMARY_ORG_ALIAS, ENVIRONMENT_TICKETS_FILE } from './config';
 
 export { ORG_ALIAS } from './config';
@@ -145,16 +147,30 @@ export async function signInAsAdmin(browser: Browser, path: string): Promise<{ c
   return { context, page };
 }
 
+// The test users signed in now, by page, and each sign-in of this run in order, so the evidence records who each step
+// ran as (lib/evidence.ts).
+const sessions = new Map<Page, string>();
+const signIns: string[] = [];
+export const signedInNow = (): string[] => [...new Set(sessions.values())].sort();
+export const signInsSoFar = (): string[] => [...signIns];
+function recordSignIn(page: Page, userName: string) {
+  if (!sessions.has(page)) page.context().once('close', () => sessions.delete(page));
+  sessions.set(page, userName);
+  signIns.push(userName);
+}
+
 // Admin session, then Login As the test user (Setup, Login Access Policies, "Administrators Can Log in as Any User"
 // must be on). Lands straight on targetPath, so the video starts on the scenario rather than Home or a list view.
 // Without an app in targetPath the user lands in whichever app they last used. If the scenario needs a particular
 // app, pass appPath(...) and check it with expectApp: a test user sitting in the standard Service Console when the
 // story built a custom console app (or the other way round) is an easy detour to miss.
 export async function signInAs(browser: Browser, userName: string, targetPath: string) {
+  checkSetUp(userName);
   const org = orgInfo();
   const userId = userIdByName(userName);
   const { context, page } = await signInAsAdmin(browser, '/lightning/setup/SetupOneHome/home');
   await loginAs(page, org, userName, userId, targetPath);
+  recordSignIn(page, userName);
   const closedTabs = await closeNonTestTabs(page);
   return { context, page, org, closedTabs };
 }
@@ -186,10 +202,12 @@ async function loginAs(page: Page, org: ReturnType<typeof orgInfo>, userName: st
 // a fresh one-time URL makes it the admin again, then Login As. It's a new sign-in for the user. "Log out as" and
 // /secur/logout.jsp can't do this: both end at the login page.
 export async function switchUser(page: Page, userName: string, targetPath: string) {
+  checkSetUp(userName);
   const org = orgInfo();
   await page.goto(sf(['org', 'open', '--url-only', '--path', '/lightning/setup/SetupOneHome/home']).url);
   await expect.poll(() => currentUser(page), { timeout: 60_000 }).toMatch(new RegExp(`^${adminIdOf(org)}`));
   await loginAs(page, org, userName, userIdByName(userName), targetPath);
+  recordSignIn(page, userName);
   await closeNonTestTabs(page);
 }
 
@@ -212,6 +230,19 @@ export function setRunTicket(ticket: string) {
   runTicket = ticket;
 }
 
+// The console restores a user's tabs one by one after the page opens, each reading "Loading..." until its record loads.
+// Waits until none is loading and the list has stopped changing for three seconds: closing sooner left another ticket's
+// tab in a video.
+async function settleTabs(page: Page) {
+  let last = '';
+  let since = Date.now();
+  await expect.poll(async () => {
+    const now = await page.locator('[role="tab"][title]').evaluateAll((els) => els.map((e) => e.getAttribute('title')).join(' / '));
+    if (now !== last || now.includes('Loading...')) { last = now; since = Date.now(); }
+    return Date.now() - since >= (now ? 3_000 : 8_000); // a page with no console tabs settles too, only later
+  }, { timeout: 45_000, intervals: [250] }).toBe(true).catch(() => undefined);
+}
+
 // Console tabs carry over from earlier sessions, so a video can show records nobody meant to record (including real
 // data copied into a partial or full sandbox, or another ticket's test records). Before recording, close every tab
 // that isn't one of this ticket's records: a Case whose Subject holds "<RECORD_PREFIX> <ticket>", or a record whose
@@ -227,6 +258,7 @@ export async function closeNonTestTabs(page: Page): Promise<string[]> {
   // A console with nothing open has an empty Workspaces bar and no tabs, which is fine.
   await page.getByRole('tab').first().waitFor({ timeout: 5_000 }).catch(() => undefined);
   if ((await page.getByRole('tab').count()) === 0) return closed;
+  await settleTabs(page);
   // The selected tab is the page the script just opened, so it's left alone. A tab strip Salesforce marks
   // aria-hidden (a standard page's own strip, such as Reports) isn't a console workspace tab, so it's skipped.
   // A selected Case tab is checked too when the run has a ticket: landing on an app reopens the user's last workspace
@@ -656,6 +688,59 @@ export function listRow(grid: Locator, text: string): Locator {
   return grid.getByRole('row').filter({ hasText: text });
 }
 
+// On a report's run page, sets the standard date filter's range (such as "This Month") without saving the report. The
+// Filters panel lists each filter as a button "Edit Filter <field> <value>"; the date filter opens a dialog
+// "Filter by <field>" whose Range is a text box with a list of ranges.
+export async function setReportDateRange(v: FrameLocator, dateField: string, range: string) {
+  const filters = v.getByRole('region', { name: 'Filters' });
+  if (!(await filters.isVisible())) await v.getByRole('button', { name: 'Filters', exact: true }).click();
+  const edit = (tail: string) => filters.getByRole('button', { name: new RegExp(`^Edit Filter ${escapeRegExp(dateField)} ${tail}`) });
+  await edit('').click();
+  const dialog = v.getByRole('dialog', { name: `Filter by ${dateField}` });
+  await dialog.getByRole('textbox', { name: 'Range' }).click();
+  await dialog.getByRole('option', { name: range, exact: true }).click();
+  await dialog.getByRole('button', { name: 'Apply', exact: true }).click();
+  await expect(edit(escapeRegExp(range)), `${dateField}: ${range}`).toBeVisible({ timeout: 30_000 });
+}
+
+// A report's run page draws its rows as you scroll, so a row far down isn't on the page until the table is scrolled to
+// it. Scrolls the grid down, as a person would, until the text shows.
+export async function scrollReportTo(grid: Locator, text: string) {
+  const cell = grid.getByText(text, { exact: true }).first();
+  await expect(async () => {
+    if (!(await cell.isVisible())) await grid.getByRole('row').last().scrollIntoViewIfNeeded();
+    await expect(cell).toBeVisible({ timeout: 2_000 });
+  }).toPass({ timeout: 60_000 });
+  await cell.scrollIntoViewIfNeeded();
+}
+
+// --- Screen flows. ---
+
+// An answer in a screen flow's radio group (a group named by its question). Salesforce draws a box over each input that
+// takes the pointer, so neither check() nor a click at the input's spot changes it. A person clicks the answer's words.
+export async function pickAnswer(scope: Page | Locator, question: string, answer: string) {
+  const group = scope.getByRole('group', { name: question, exact: true });
+  const radio = group.getByRole('radio', { name: answer, exact: true });
+  const words = group.getByText(answer, { exact: true });
+  await words.scrollIntoViewIfNeeded();
+  await expect(async () => {
+    await words.click();
+    await expect(radio).toBeChecked({ timeout: 1_500 });
+  }).toPass({ timeout: 30_000 });
+}
+
+// Ticks or unticks one item of a screen flow's checkbox group, by its words for the same reason. One click, so a box that
+// needs two fails the step.
+export async function tickItem(scope: Page | Locator, list: string, item: string, on = true) {
+  const group = scope.getByRole('group', { name: new RegExp(`^${escapeRegExp(list)}`) });
+  const box = group.getByRole('checkbox', { name: item, exact: true });
+  const words = group.getByText(item, { exact: true });
+  await words.scrollIntoViewIfNeeded();
+  await expect(box, `${item} before`).toBeChecked({ checked: !on });
+  await words.click();
+  await expect(box, `${item} ${on ? 'ticked' : 'unticked'} with one click`).toBeChecked({ checked: on });
+}
+
 // --- Email sending in a sandbox. ---
 // A sandbox's Access to Send Email is usually "System email only", so a send from a record is refused. A step that
 // sends an email wraps the send in withEmailOpen: it turns access to All email right before the send and back straight
@@ -687,7 +772,7 @@ export async function setEmailAccess(browser: Browser, level: EmailLevel) {
 
 // Email on, the send, email off. `why` names the step ("S4 reply to the customer").
 export async function withEmailOpen<T>(browser: Browser, why: string, send: () => Promise<T>): Promise<T> {
-  await setEmailAccess(browser, 'All email');
+  await waiting(() => setEmailAccess(browser, 'All email'));
   emailOpenedAt = new Date();
   emailOpenWhy = why;
   try {
@@ -699,7 +784,7 @@ export async function withEmailOpen<T>(browser: Browser, why: string, send: () =
 
 export async function closeEmailIfOpen(browser: Browser) {
   if (!emailOpenedAt) return;
-  await setEmailAccess(browser, 'System email only');
+  await waiting(() => setEmailAccess(browser, 'System email only'));
   const closed = new Date();
   emailWindows.push({
     why: emailOpenWhy, opened: emailOpenedAt.toISOString(), closed: closed.toISOString(),
