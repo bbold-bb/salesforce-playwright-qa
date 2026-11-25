@@ -145,7 +145,7 @@ test('F1 the test user opens a new Case and saves it', async ({ browser }) => {
       await pickValue(p, 'Case Origin', ORIGIN);
       await beat(p);
       await p.getByRole('button', { name: 'Save', exact: true }).click();
-      await p.waitForURL(/\/lightning\/r\/Case\/\w{18}\/view/);
+      await p.waitForURL(/\/lightning\/r\/(Case\/)?500\w{15}\/view/); // some apps leave the object out of the address
       const id = recordIdFromUrl(p.url());
       await expect(p.getByText(subject).first()).toBeVisible();
       await beat(p, 2500);

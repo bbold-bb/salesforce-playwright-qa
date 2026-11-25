@@ -56,7 +56,7 @@ class Names(unittest.TestCase):
         self.assertLessEqual(len(i["Alias"]), 8)
 
     def test_two_testers_differ(self):
-        a, b = (tu.identity("Specialist", t, ORG) for t in ("Ana P", "Ben Q"))
+        a, b = (tu.identity("Specialist", t, ORG) for t in ("Ana P", "Raj Q"))
         for f in ("Username", "Email", "LastName"):
             self.assertNotEqual(a[f], b[f])
 
@@ -72,7 +72,7 @@ class Names(unittest.TestCase):
     def test_clashes(self):
         self.assertTrue(tu.name_clashes(["SpecialistTest Ana P"], ["SpecialistTest Ana Parker"]))
         self.assertTrue(tu.name_clashes(["SpecialistTest Ana Parker"], ["specialisttest ana p"]))
-        self.assertFalse(tu.name_clashes(["SpecialistTest Ana P"], ["SpecialistTest Ben Q", "SupervisorTest Ana P"]))
+        self.assertFalse(tu.name_clashes(["SpecialistTest Ana P"], ["SpecialistTest Raj Q", "SupervisorTest Ana P"]))
 
 
 class Plan(unittest.TestCase):

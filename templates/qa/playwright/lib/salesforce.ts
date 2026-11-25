@@ -339,6 +339,13 @@ export async function pickLookup(scope: Page | Locator, label: string, name: str
 export async function picklistOptions(page: Page, label: string): Promise<string[]> {
   const box = page.getByRole('combobox', { name: label, exact: true });
   await box.click();
+  // A click on a form that's still drawing can leave the list closed, so it's opened once more.
+  try {
+    await expect(box).toHaveAttribute('aria-expanded', 'true', { timeout: 3_000 });
+  } catch {
+    await box.click();
+    await expect(box).toHaveAttribute('aria-expanded', 'true', { timeout: 5_000 });
+  }
   const listId = await box.getAttribute('aria-controls');
   const list = listId ? page.locator(`[id="${listId}"]`) : page.getByRole('listbox');
   await expect(list.getByRole('option').first()).toBeVisible();
@@ -551,9 +558,9 @@ export async function recordActions(page: Page): Promise<string[]> {
 }
 
 // The record Id from a record page's address, after a save. Wait for the address first:
-// await page.waitForURL(/\/lightning\/r\/Case\/\w{18}\/view/).
+// await page.waitForURL(/\/lightning\/r\/(Case\/)?500\w{15}\/view/).
 export function recordIdFromUrl(url: string, object = 'Case'): string {
-  const m = url.match(new RegExp(`/lightning/r/${object}/([A-Za-z0-9]{18})/view`));
+  const m = url.match(new RegExp(`/lightning/r/(?:${object}/)?([A-Za-z0-9]{18})/view`)); // some apps leave the object out
   if (!m) throw new Error(`Not on a ${object} record page: ${new URL(url).pathname}`);
   return m[1];
 }

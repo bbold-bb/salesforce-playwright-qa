@@ -4,7 +4,7 @@ A kit for running QA on a Salesforce build with Claude Code. For each build tick
 
 It's for Salesforce teams: solution architects, consultants, admins and QA. Copy it into your own project and set your own names.
 
-**Status: draft.** The harness helpers and the process were built and proven on one large Service Cloud project. The kit's example spec hasn't yet been run on a fresh org, and nobody has followed the setup guide end to end. Fix what you find and send it back as a pull request.
+**Status: draft.** The harness helpers and the process were built and proven on one large Service Cloud project. The test user script and the example spec have run in a scratch org, but nobody has followed the setup guide end to end. Fix what you find and send it back as a pull request.
 
 ## What QA answers
 

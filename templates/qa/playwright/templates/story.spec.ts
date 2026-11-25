@@ -102,7 +102,7 @@ async function newCase(page: Page, subject: string) {
 
 async function save(page: Page, subject: string): Promise<string> {
   await page.getByRole('button', { name: 'Save', exact: true }).click();
-  await page.waitForURL(/\/lightning\/r\/Case\/500\w{15}\/view/);
+  await page.waitForURL(/\/lightning\/r\/(Case\/)?500\w{15}\/view/); // some apps leave the object out of the address
   await expect(page.getByText(subject).first()).toBeVisible();
   return recordIdFromUrl(page.url());
 }

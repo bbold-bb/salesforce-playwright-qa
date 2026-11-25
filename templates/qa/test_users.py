@@ -529,5 +529,6 @@ if __name__ == "__main__":
     try:
         sys.exit(main())
     except Stop as e:
+        sys.stdout.flush()
         print(e, file=sys.stderr)
         sys.exit(2)

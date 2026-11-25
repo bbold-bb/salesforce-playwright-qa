@@ -16,6 +16,7 @@ What went wrong while the process was built on a large Salesforce Service Cloud 
 | Lightning caches metadata across Login As | A permission set given through the API didn't show its record type at the next Login As in the same browser, because Lightning reused the object info it keeps in browser storage. A fresh browser showed it | Clear the org's browser storage before switching users when access changed mid-run |
 | Two runs at once on one machine | Runs from two chats shared the test users, so each video showed the other run's records and tabs. Rehearsals did it to each other too | Every run takes a lock before any spec starts, and a second one waits its turn |
 | Two testers in one sandbox | The lock covers one machine, so two people on the same test users still collided | Each tester has test users of their own, named for them (`test_users.py`). Email deliverability and config records a test changes are still shared: agree first |
+| A saved record's address can leave out the object | In a standard app a new Case opened at `/lightning/r/<Id>/view`, so a wait for `/lightning/r/Case/` never ended | Match the object as optional; `recordIdFromUrl` does |
 | Tabs still loading when they're closed | The console restores tabs one by one, each reading "Loading...", so another ticket's tab appeared after the cleanup and showed in the video | The cleanup waits until none is loading and the list has stopped changing |
 
 ## Playwright and the sf CLI
